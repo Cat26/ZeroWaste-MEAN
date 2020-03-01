@@ -1,0 +1,21 @@
+{
+  "name": "zerowasteapp",
+  "version": "1.0.0",
+  "description": "MEAN stack Zero Waste app",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app"
+  },
+  "dependencies": {
+    "express": "*",
+    "mongoose": "*",
+    "bcryptjs": "*",
+    "cors": "*",
+    "jsonwebtoken": "*",
+    "body-parser": "*",
+    "passport": "*",
+    "passport-jwt": "*"
+  },
+  "author": "Julia Hardy, Mateusz Ambrożewicz",
+  "license": "MIT"
+}
