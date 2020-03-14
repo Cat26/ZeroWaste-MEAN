@@ -18,5 +18,5 @@ Projekt zostanie oparty na technolochiach MEAN stack (MongoDB, Express.js, Angul
 ### wymagania:
 - yarn https://yarnpkg.com/en/docs/getting-started (yarn/ yarn install)
 - node 12.16.1
-- nodemon (optional)
+- nodemon (optional) (nodemon start --ext *)
 - angular CLI 9.0.3

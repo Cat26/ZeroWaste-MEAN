@@ -10,8 +10,10 @@ import { HomeComponent } from './components/home/home.component';
 import { EventsComponent } from './components/events/events.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { FormsModule } from "@angular/forms";
+import { HttpClientModule} from "@angular/common/http";
 
 import { ValidateService } from "./services/validate.service";
+import { AuthService } from "./services/auth.service";
 import { FlashMessagesModule } from "angular2-flash-messages";
 
 @NgModule({
@@ -26,11 +28,12 @@ import { FlashMessagesModule } from "angular2-flash-messages";
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     FormsModule,
     FlashMessagesModule.forRoot()
   ],
-  providers: [ValidateService],
+  providers: [ValidateService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
