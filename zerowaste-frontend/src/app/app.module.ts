@@ -33,7 +33,10 @@ import { FlashMessagesModule } from "angular2-flash-messages";
     FormsModule,
     FlashMessagesModule.forRoot()
   ],
-  providers: [ValidateService, AuthService],
+  providers: [
+    ValidateService,
+    AuthService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
