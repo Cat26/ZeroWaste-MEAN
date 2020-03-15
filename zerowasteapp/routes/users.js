@@ -16,9 +16,9 @@ router.post('/register', (req, res, next) => {
 
     User.addUser(newUser, (err, user) => {
         if(err){
-            res.json({success: false, msq: 'Failed to register user'})
+            res.json({success: false, msg: 'Failed to register user'})
         } else {
-            res.json({success: true, msq: 'User registered'})
+            res.json({success: true, msg: 'User registered'})
         }
     })
 });
@@ -41,6 +41,7 @@ router.post('/authenticate', (req, res, next) => {
                 });
                 res.json({
                     success: true,
+                    msg: 'Login successful',
                     token: 'JWT '+token,
                     user: {
                         id: user._id,

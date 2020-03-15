@@ -20,3 +20,5 @@ Projekt zostanie oparty na technolochiach MEAN stack (MongoDB, Express.js, Angul
 - node 12.16.1
 - nodemon (optional) (nodemon start --ext *)
 - angular CLI 9.0.3
+
+
