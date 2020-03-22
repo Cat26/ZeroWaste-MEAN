@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
+const Event = require('../models/event');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
@@ -62,6 +63,25 @@ router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,
     res.json({
         user: req.user
     });
+});
+
+router.post('/events', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+    let newEvent = new Event({
+        name: req.body.name,
+        description: req.body.description,
+        img: req.body.img,
+        eventDate: req.body.eventDate,
+        owner: req.user,
+        eventLocation: req.body.eventLocation
+    });
+
+    Event.addEvent(newEvent, (err, event) => {
+        if(err){
+            res.json({success: false, msg: 'Failed to add events', error: err})
+        } else {
+            res.json({success: true, msg: 'Event created'})
+        }
+    })
 });
 
 module.exports = router;
