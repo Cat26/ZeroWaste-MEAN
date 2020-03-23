@@ -51,8 +51,11 @@ module.exports.getAllEvents = function (callback) {
 
 module.exports.addEvent = function (newEvent, callback) {
     newEvent.save(callback);
+<<<<<<< HEAD
 };
 
 module.exports.deleteEvent = function (idEvent, callback) {
     Event.findByIdAndRemove(idEvent, callback);
+=======
+>>>>>>> 83353720f7f792dd43f6ada05b515ff8c1fa8115
 };

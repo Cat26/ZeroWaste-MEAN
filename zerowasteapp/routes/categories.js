@@ -41,3 +41,9 @@ router.delete('/events/:_id/delete', passport.authenticate('jwt', {session:false
 // });
 
 module.exports = router;
+
+// events
+
+router.get('/events', (req, res, next) => {
+    Event.getAllEvents()
+});
