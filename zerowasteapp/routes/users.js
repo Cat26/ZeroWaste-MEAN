@@ -65,23 +65,5 @@ router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,
     });
 });
 
-router.post('/events', passport.authenticate('jwt', {session:false}), (req, res, next) => {
-    let newEvent = new Event({
-        name: req.body.name,
-        description: req.body.description,
-        img: req.body.img,
-        eventDate: req.body.eventDate,
-        owner: req.user,
-        eventLocation: req.body.eventLocation
-    });
-
-    Event.addEvent(newEvent, (err, event) => {
-        if(err){
-            res.json({success: false, msg: 'Failed to add events', error: err})
-        } else {
-            res.json({success: true, msg: 'Event created'})
-        }
-    })
-});
 
 module.exports = router;
