@@ -23,14 +23,18 @@ const EventSchema = mongoose.Schema({
         required: true
     },
 
-    likesUserList: {
+    likesUserList: [
+        {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    },
-    dislikesUserList: {
+        }
+    ],
+    dislikesUserList: [
+        {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    },
+        }
+    ],
     owner: UserSchema,
     participants: {
         type: mongoose.Schema.Types.ObjectId,
@@ -53,6 +57,14 @@ module.exports.addEvent = function (newEvent, callback) {
     newEvent.save(callback);
 };
 
+module.exports.updateEvent = function (idEvent, updatedEvent, callback) {
+    Event.findByIdAndUpdate(idEvent, updatedEvent, callback);
+};
+
 module.exports.deleteEvent = function (idEvent, callback) {
     Event.findByIdAndRemove(idEvent, callback);
+};
+
+module.exports.getUserEvents = function (userId, callback) {
+    Event.find({ 'owner._id': userId }, callback);
 };
