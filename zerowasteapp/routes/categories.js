@@ -3,6 +3,7 @@ const router = express.Router();
 const Event = require('../models/event');
 const passport = require('passport');
 const multer = require('multer');
+const fs = require('fs');
 const storage = multer.diskStorage({
     destination: function (req, file, callback) {
         callback(null, './uploads/');
@@ -66,6 +67,11 @@ router.delete('/events/:_id/delete', passport.authenticate('jwt', {session:false
         } else if(!event) {
             res.status(400).send('Event not found')
         } else {
+            fs.unlink(event.eventImage, (err) => {
+                if(err) {
+                    console.log(err);
+                }
+            });
             res.json({success: true, msg: 'Event deleted'})
         }
     })
@@ -76,6 +82,7 @@ router.get('/events', (req, res, next) => {
         if(err) {
             res.json({success: false, msg: 'Failed to get events', error: err})
         } else {
+
             res.json({
                 events: events
             })

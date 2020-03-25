@@ -50,7 +50,7 @@ const EventSchema = mongoose.Schema({
 const Event = module.exports = mongoose.model('Event', EventSchema);
 
 module.exports.getAllEvents = function (callback) {
-    Event.find(callback);
+    Event.find(callback).select('-owner.password');
 };
 
 module.exports.addEvent = function (newEvent, callback) {
@@ -66,5 +66,5 @@ module.exports.deleteEvent = function (idEvent, callback) {
 };
 
 module.exports.getUserEvents = function (userId, callback) {
-    Event.find({ 'owner._id': userId }, callback);
+    Event.find({ 'owner._id': userId }, callback).select('-owner.password');
 };
