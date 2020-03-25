@@ -36,10 +36,12 @@ const EventSchema = mongoose.Schema({
         }
     ],
     owner: UserSchema,
-    participants: {
+    participants: [
+        {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    },
+        }
+    ],
     eventLocation: {
         type: String,
         required: true,
