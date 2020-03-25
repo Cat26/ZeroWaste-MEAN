@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const config = require('./config/database');
 
 // Connect to Database
-mongoose.connect(config.database, { useNewUrlParser: true , useUnifiedTopology: true });
+mongoose.connect(config.database, { useNewUrlParser: true , useUnifiedTopology: true, useFindAndModify: false });
 
 // On Connection
 mongoose.connection.on('connected', () => {
@@ -22,6 +22,7 @@ mongoose.connection.on('error', (err) => {
 const app = express();
 
 const users = require('./routes/users');
+const categories = require('./routes/categories');
 
 // Port Number
 const port = 3000;
@@ -31,6 +32,7 @@ app.use(cors());
 
 // Set Static Folder
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/uploads', express.static('uploads'));
 
 // Body Parser Middleware
 app.use(bodyParser.json());
@@ -42,6 +44,8 @@ app.use(passport.session());
 require('./config/passport')(passport);
 
 app.use('/users', users);
+app.use('/categories', categories);
+
 
 // Index Route
 app.get('/', (req, res) => {

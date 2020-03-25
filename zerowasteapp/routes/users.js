@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
+const Event = require('../models/event');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
@@ -59,9 +60,17 @@ router.post('/authenticate', (req, res, next) => {
 
 // Profile
 router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res, next) => {
-    res.json({
-        user: req.user
+    Event.getUserEvents(req.user._id, (err, userEvents) => {
+        if(err) {
+            res.status(400).send('Could not get profile')
+        } else {
+            res.json({
+                user: req.user,
+                events: userEvents
+            });
+        }
     });
 });
+
 
 module.exports = router;
