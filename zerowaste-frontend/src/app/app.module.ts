@@ -12,9 +12,12 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule} from "@angular/common/http";
 
-import { ValidateService } from "./services/validate.service";
-import { AuthService } from "./services/auth.service";
+import { ValidateService } from "./services/validate/validate.service";
+import { AuthService } from "./services/auth/auth.service";
 import { FlashMessagesModule } from "angular2-flash-messages";
+import { EventsListComponent } from './components/events/events-list/events-list.component';
+import { EventItemComponent } from './components/events/events-list/event-item/event-item.component';
+import { EventsService } from "./services/events/events.service";
 
 @NgModule({
   declarations: [
@@ -24,7 +27,9 @@ import { FlashMessagesModule } from "angular2-flash-messages";
     RegisterComponent,
     HomeComponent,
     EventsComponent,
-    ProfileComponent
+    ProfileComponent,
+    EventsListComponent,
+    EventItemComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +41,7 @@ import { FlashMessagesModule } from "angular2-flash-messages";
   providers: [
     ValidateService,
     AuthService,
+    EventsService
   ],
   bootstrap: [AppComponent]
 })
