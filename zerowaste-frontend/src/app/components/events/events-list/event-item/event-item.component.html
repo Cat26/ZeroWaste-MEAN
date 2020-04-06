@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-lg-8">
+    <div class="card {{ 'event-' + eventItem._id }}">
+      <img src="{{ 'http://localhost:3000/' + eventItem.eventImage }}" class="card-img-top" alt="{{ eventItem.name }}"/>
+      <div class="card-body">
+        <h4 class="card-title">{{ eventItem.name }}</h4>
+        <h6>{{ 'event date: ' + formatDate(eventItem.eventDate) }}</h6>
+        <h6>{{ 'event organiser: ' + eventItem.owner.username }}</h6>
+        <p class="card-text">{{eventItem.description}}</p>
+        <a href="#" class="btn btn-primary">Sign in</a>
+      </div>
+    </div>
+  </div>
+</div>
