@@ -1,0 +1,52 @@
+<div className="card card-body mt-4 mb-4">
+  <form [formGroup]="eventForm" (ngSubmit)="createEventCall()">
+    <div class="form-group">
+      <label>Event Name</label>
+      <input
+        class="form-control"
+        type="text"
+        name="name"
+        (change)="onChangeEventProperty($event)"
+      />
+    </div>
+    <div class="form-group">
+      <label>Event description</label>
+      <input
+        class="form-control"
+        type="text"
+        name="description"
+      />
+    </div>
+    <div class="form-group">
+      <label>Event date</label>
+      <input
+        class="form-control"
+        type="datetime-local"
+        name="eventDate"
+      />
+    </div>
+    <div class="form-group">
+      <label>Event location</label>
+      <input
+        class="form-control"
+        type="text"
+        name="eventLocation"
+      />
+    </div>
+    <div class="form-group">
+      <label>Event photo</label>
+      <input
+        className="form-control"
+        type="file"
+        name="eventImage"
+        accept="image/*"
+        (change)="onFileSelect($event)"
+      />
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">
+        Submit
+      </button>
+    </div>
+  </form>
+</div>

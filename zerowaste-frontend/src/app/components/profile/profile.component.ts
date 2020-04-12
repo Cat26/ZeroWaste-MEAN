@@ -14,6 +14,31 @@ export class ProfileComponent implements OnInit {
     username: ''
   };
 
+  selectedOption = "events";
+
+  profileDisplayOptions = [
+    {
+      id: 1,
+      optionValue: "events",
+      optionName: "Events",
+      optionChecked: true
+    },
+    {
+      id: 2,
+      optionValue: "shops",
+      optionName: "Shops",
+      optionChecked: false
+    },
+    {
+      id: 3,
+      optionValue: "personal-goals",
+      optionName: "Personal Goals",
+      optionChecked: false
+    },
+
+    ];
+
+
   constructor(
     private authService: AuthService,
     private router: Router
@@ -29,4 +54,8 @@ export class ProfileComponent implements OnInit {
       });
   }
 
+  onOptionChange(option) {
+    console.log('inside')
+    this.selectedOption = option.optionValue;
+  }
 }

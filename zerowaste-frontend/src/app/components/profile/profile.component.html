@@ -23,18 +23,22 @@
   </div>
   <hr>
   <div class="row">
-    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-      <label class="btn btn-secondary active">
-        <input type="radio" name="options" id="option1" checked> Events
-      </label>
-      <label class="btn btn-secondary">
-        <input type="radio" name="options" id="option2"> Shops
-      </label>
-      <label class="btn btn-secondary">
-        <input type="radio" name="options" id="option3"> Personal Goals
-      </label>
+    <div class="col-sm-12">
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary" *ngFor="let option of profileDisplayOptions">
+          <input
+            type="radio"
+            name="radiogroup"
+            [value]="option.optionValue"
+            [checked]="option.optionChecked"
+            (click)="onOptionChange(option)">
+          {{ option.optionName}}
+        </label>
+      </div>
     </div>
   </div>
+  <app-user-events *ngIf="selectedOption === 'events'"></app-user-events>
 </div>
+
 
 
