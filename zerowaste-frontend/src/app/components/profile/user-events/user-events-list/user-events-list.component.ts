@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-user-events-list',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-events-list.component.css']
 })
 export class UserEventsListComponent implements OnInit {
+  @Input() userEvents: [];
 
   constructor() { }
 

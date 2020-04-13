@@ -30,5 +30,15 @@ export class EventsService {
       })
     };
     return this.http.post('http://localhost:3000/categories/events', eventData, httpOptions);
-  };
+  }
+
+  deleteEvent(eventId){
+    this.authService.loadToken();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': this.authService.authToken
+      })
+    };
+    return this.http.delete('http://localhost:3000/categories/events/' + eventId + '/delete', httpOptions);
+  }
 }

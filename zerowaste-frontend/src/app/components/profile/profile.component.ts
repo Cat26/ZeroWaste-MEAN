@@ -14,6 +14,8 @@ export class ProfileComponent implements OnInit {
     username: ''
   };
 
+  userEvents = [];
+
   selectedOption = "events";
 
   profileDisplayOptions = [
@@ -46,7 +48,8 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.authService.getProfile().subscribe((profile: any) => {
-      this.user = profile.user
+      this.user = profile.user;
+      this.userEvents = profile.events;
     },
       error => {
         console.log(error);
@@ -55,7 +58,6 @@ export class ProfileComponent implements OnInit {
   }
 
   onOptionChange(option) {
-    console.log('inside')
     this.selectedOption = option.optionValue;
   }
 }

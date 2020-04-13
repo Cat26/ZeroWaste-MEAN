@@ -1,1 +1,11 @@
-<p>user-event-item works!</p>
+<div class="card {{ 'event-' + userEventItem._id }}">
+  <img src="{{ 'http://localhost:3000/' + userEventItem.eventImage }}" class="card-img-top" alt="{{ userEventItem.name }}"/>
+  <div class="card-body">
+    <h4 class="card-title">{{ userEventItem.name }}</h4>
+    <h6>{{ 'event date: ' + formatDate(userEventItem.eventDate) }}</h6>
+    <p class="card-text">{{userEventItem.description}}</p>
+    <button class="btn btn-danger" (click)="onDeleteEvent()">delete</button>
+    <button class="btn btn-warning">update</button>
+  </div>
+</div>
+
