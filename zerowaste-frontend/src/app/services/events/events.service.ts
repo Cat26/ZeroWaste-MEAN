@@ -26,7 +26,6 @@ export class EventsService {
     this.authService.loadToken();
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'multipart/form-data',
         'Authorization': this.authService.authToken
       })
     };

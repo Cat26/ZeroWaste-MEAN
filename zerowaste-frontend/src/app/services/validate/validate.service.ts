@@ -19,4 +19,12 @@ export class ValidateService {
     const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
   }
+
+  validateEvent(eventForm) {
+    if (eventForm.get('name').value && eventForm.get('description').value && eventForm.get('eventImage').value &&  eventForm.get('eventDate').value && eventForm.get('eventLocation').value){
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

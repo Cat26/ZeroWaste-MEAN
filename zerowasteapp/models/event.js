@@ -11,7 +11,7 @@ const EventSchema = mongoose.Schema({
     description: {
         type: String,
         required: true,
-        maxlength: 220,
+        maxlength: 500,
         minlength: 10
     },
     eventImage: {
