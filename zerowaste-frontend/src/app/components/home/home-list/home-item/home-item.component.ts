@@ -19,7 +19,7 @@ export class HomeItemComponent implements OnInit {
   ngOnInit(): void {
   }
   formatDate(date) {
-    let formatedDate = moment(date).format('LLLL');
+    let formatedDate = moment(date).format('LLL');
     return formatedDate;
   }
 

@@ -13,7 +13,7 @@ export class HomeListComponent implements OnInit {
   ) {  }
 
   ngOnInit(): void {
-    this.eventService.getAllEvents().subscribe((events: any) => {
+    this.eventService.getThreeNewestItem().subscribe((events: any) => {
       this.events = events.events;
       console.log(events.events);
     },

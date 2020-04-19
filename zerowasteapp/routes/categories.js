@@ -109,4 +109,16 @@ router.get('/events', (req, res, next) => {
     });
 });
 
+router.get('/newest', (req, res, next) => {
+    Event.getThreeNewestEvent((err, events) =>{
+        if(err){
+            res.json({success: false, msg: 'Failed to get three newest events', error: err})
+        } else {
+            res.json({
+                events: events
+            })
+        }
+    })
+});
+
 module.exports = router;
