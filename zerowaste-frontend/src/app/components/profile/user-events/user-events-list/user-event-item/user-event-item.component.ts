@@ -37,7 +37,7 @@ export class UserEventItemComponent implements OnInit {
     this.eventService.deleteEvent(this.userEventItem._id).subscribe(
       (res: any) => {
         if (res.success) {
-          this.emitEventService.emitChildEvent('event deleted');
+          this.emitEventService.emitDeleteCreateEvent('event deleted');
           this.flashMessage.show(
             res.msg,
             {cssClass: 'alert-success', timeout: 3000}
@@ -54,7 +54,7 @@ export class UserEventItemComponent implements OnInit {
   }
 
   updateEvent(eventItem) {
-    console.log(eventItem)
+    this.emitEventService.emitUpdateEvent(eventItem);
   }
 
 }

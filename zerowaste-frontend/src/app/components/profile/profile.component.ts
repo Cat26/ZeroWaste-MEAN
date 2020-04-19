@@ -49,7 +49,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.getProfileData();
-    this.emitEventService.childEventListener().subscribe(msg =>{
+    this.emitEventService.deleteCreateEventListener().subscribe(msg =>{
       this.getProfileData();
     })
   }

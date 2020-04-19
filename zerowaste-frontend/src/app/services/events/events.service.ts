@@ -10,12 +10,13 @@ export class EventsService {
   constructor(
     private http: HttpClient,
     private authService: AuthService
-  ) { }
+  ) {
+  }
 
   getAllEvents() {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json'
+        'Content-Type': 'application/json'
       })
     };
     return this.http.get('http://localhost:3000/categories/events', httpOptions);
@@ -32,7 +33,7 @@ export class EventsService {
     return this.http.post('http://localhost:3000/categories/events', eventData, httpOptions);
   }
 
-  deleteEvent(eventId){
+  deleteEvent(eventId) {
     this.authService.loadToken();
     const httpOptions = {
       headers: new HttpHeaders({
@@ -40,5 +41,14 @@ export class EventsService {
       })
     };
     return this.http.delete('http://localhost:3000/categories/events/' + eventId + '/delete', httpOptions);
+  }
+
+  updateEvent(eventId, eventData) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': this.authService.authToken
+      })
+    };
+    return this.http.put('http://localhost:3000/categories/events/' + eventId + '/update', eventData, httpOptions)
   }
 }

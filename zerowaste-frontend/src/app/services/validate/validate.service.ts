@@ -5,7 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class ValidateService {
 
-  constructor() { }
+  constructor() {
+  }
 
   validateRegister(user) {
     if (user.name == undefined || user.email == undefined || user.password == undefined || user.username == undefined) {
@@ -20,11 +21,15 @@ export class ValidateService {
     return re.test(String(email).toLowerCase());
   }
 
-  validateEvent(eventForm) {
-    if (eventForm.get('name').value && eventForm.get('description').value && eventForm.get('eventImage').value &&  eventForm.get('eventDate').value && eventForm.get('eventLocation').value){
-      return true;
-    } else {
-      return false;
+  validateEvent(eventForm, update) {
+    if (eventForm.get('name').value && eventForm.get('description').value && eventForm.get('eventDate').value && eventForm.get('eventLocation').value) {
+      if (update) {
+        return true;
+      } else if (eventForm.get('eventImage').value) {
+        return true;
+      }
     }
+    return false;
   }
+
 }

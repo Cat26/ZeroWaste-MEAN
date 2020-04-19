@@ -1,19 +1,29 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject} from "rxjs";
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmitEventService {
-  private childActionEvent = new BehaviorSubject<string>('');
+  private createDeleteActionEvent = new BehaviorSubject<string>('');
+  private updateActionEvent = new BehaviorSubject<string>('');
 
   constructor() {
   }
-  emitChildEvent(msg: string) {
-    this.childActionEvent.next(msg)
+
+  emitDeleteCreateEvent(msg: string) {
+    this.createDeleteActionEvent.next(msg)
   }
 
-  childEventListener() {
-    return this.childActionEvent.asObservable();
+  deleteCreateEventListener() {
+    return this.createDeleteActionEvent.asObservable();
+  }
+
+  emitUpdateEvent(eventData) {
+    this.updateActionEvent.next(eventData);
+  }
+
+  updateEventListener(){
+    return this.updateActionEvent.asObservable();
   }
 }
