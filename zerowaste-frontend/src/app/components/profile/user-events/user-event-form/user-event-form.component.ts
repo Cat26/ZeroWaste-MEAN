@@ -3,6 +3,7 @@ import { EventsService } from "../../../../services/events/events.service";
 import {FormBuilder, FormGroup, FormControl} from "@angular/forms";
 import {FlashMessagesService} from "angular2-flash-messages";
 import {ValidateService} from "../../../../services/validate/validate.service";
+import { EmitEventService } from "../../../../services/emitter/emit-event.service";
 
 @Component({
   selector: 'app-user-event-form',
@@ -24,7 +25,8 @@ export class UserEventFormComponent implements OnInit {
     private eventService: EventsService,
     private formBuilder: FormBuilder,
     private flashMessage: FlashMessagesService,
-    private validateService: ValidateService
+    private validateService: ValidateService,
+    private emitEventService: EmitEventService
   ) { }
 
   ngOnInit(): void {}
@@ -34,13 +36,6 @@ export class UserEventFormComponent implements OnInit {
       this.eventFile = event.target.files[0];
     }
   }
-  //
-  // onChangeEventProperty(event) {
-  //   if(event.target.value) {
-  //     const value = event.target.value;
-  //     this.eventForm.get(event.target.name).setValue(value);
-  //   }
-  // }
 
   createEventCall() {
     if(!this.validateService.validateEvent(this.eventForm)){
@@ -58,6 +53,7 @@ export class UserEventFormComponent implements OnInit {
     formData.append('eventLocation', this.eventForm.get('eventLocation').value);
     this.eventService.createEvent(formData).subscribe(
       (res: any) => { if (res.success) {
+        this.emitEventService.emitChildEvent('event created');
         this.flashMessage.show(
           res.msg,
           {cssClass: 'alert-success', timeout: 3000}

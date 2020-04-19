@@ -14,6 +14,7 @@ import { HttpClientModule} from "@angular/common/http";
 
 import { ValidateService } from "./services/validate/validate.service";
 import { AuthService } from "./services/auth/auth.service";
+import { EmitEventService } from "./services/emitter/emit-event.service";
 import { FlashMessagesModule } from "angular2-flash-messages";
 import { EventsListComponent } from './components/events/events-list/events-list.component';
 import { EventItemComponent } from './components/events/events-list/event-item/event-item.component';
@@ -50,7 +51,8 @@ import { UserEventItemComponent } from './components/profile/user-events/user-ev
   providers: [
     ValidateService,
     AuthService,
-    EventsService
+    EventsService,
+    EmitEventService
   ],
   bootstrap: [AppComponent]
 })

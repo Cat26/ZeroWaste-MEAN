@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import * as moment from "moment";
-import {EventsService} from "../../../../../services/events/events.service";
-import {FlashMessagesService} from "angular2-flash-messages";
+import { EventsService } from "../../../../../services/events/events.service";
+import { FlashMessagesService } from "angular2-flash-messages";
+import { EmitEventService } from "../../../../../services/emitter/emit-event.service";
 
 @Component({
   selector: 'app-user-event-item',
@@ -14,38 +15,46 @@ export class UserEventItemComponent implements OnInit {
     description: string,
     eventImage: string,
     eventDate: string,
-    _id: string};
+    _id: string
+  };
 
   constructor(
     private eventService: EventsService,
-    private flashMessage: FlashMessagesService
-  ) { }
+    private flashMessage: FlashMessagesService,
+    private emitEventService: EmitEventService
+  ) {
+  }
 
   ngOnInit(): void {
   }
 
   formatDate(date) {
-    let formatedDate = moment(date).format('LLLL')
+    let formatedDate = moment(date).format('LLLL');
     return formatedDate
   }
 
-  onDeleteEvent() {
+  deleteEvent() {
     this.eventService.deleteEvent(this.userEventItem._id).subscribe(
-      (res: any) => { if (res.success) {
-        this.flashMessage.show(
-          res.msg,
-          {cssClass: 'alert-success', timeout: 3000}
-        );
-      }
-      else {
-        this.flashMessage.show(
-          res.msg,
-          {cssClass: 'alert-danger', timeout: 5000}
-        );
-        console.log(res.error)
-      }
+      (res: any) => {
+        if (res.success) {
+          this.emitEventService.emitChildEvent('event deleted');
+          this.flashMessage.show(
+            res.msg,
+            {cssClass: 'alert-success', timeout: 3000}
+          );
+        } else {
+          this.flashMessage.show(
+            res.msg,
+            {cssClass: 'alert-danger', timeout: 5000}
+          );
+          console.log(res.error)
+        }
       }
     )
+  }
+
+  updateEvent(eventItem) {
+    console.log(eventItem)
   }
 
 }
