@@ -240,22 +240,3 @@ router.post('/newShop', (req, res) => {
         }
     })
 });
-
-// Address
-router.post('/newAddress', (req, res, next) => {
-    let newAddress = new Address({
-        street: req.body.street,
-        buildingNumber: req.body.buildingNumber,
-        apartmentNumber: req.body.apartmentNumber,
-        postCode: req.body.postCode,
-        cityName: req.body.cityName
-    });
-
-    Address.addAddress(newAddress, (err, address) => {
-        if(err){
-            res.json({success: false, msg: 'Failed to add new address.'})
-        }else {
-            res.json({success: true, msg: 'New address added.'})
-        }
-    });
-});
