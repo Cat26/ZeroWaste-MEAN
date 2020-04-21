@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const UserSchema = mongoose.model('User').schema;
-// const AddressSchema = require('../models/address').AddressSchema;
+const UserSchema = require('../models/user').UserSchema;
+const AddressSchema = require('../models/address').AddressSchema;
 
 const ShopSchema = mongoose.Schema({
     name: {
