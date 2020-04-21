@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormControl } from "@angular/forms";
 import { FlashMessagesService } from "angular2-flash-messages";
 import { ValidateService } from "../../../../services/validate/validate.service";
 import { EmitEventService } from "../../../../services/emitter/emit-event.service";
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-user-event-form',
@@ -61,7 +62,7 @@ export class UserEventFormComponent implements OnInit {
     this.eventForm.patchValue({
       name: updateEventData.name,
       description: updateEventData.description,
-      eventDate: new Date(updateEventData.eventDate),
+      eventDate: moment(updateEventData.eventDate).format('YYYY-MM-DDTHH:MM:SS'),
       eventLocation: updateEventData.eventLocation
     });
   }

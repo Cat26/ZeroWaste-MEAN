@@ -47,15 +47,34 @@ router.post('/events', upload.single('eventImage'), passport.authenticate('jwt',
     })
 });
 
-router.put('/events/:_id/update', passport.authenticate('jwt', {session:false}), (req, res, next) => {
-    Event.updateEvent(req.params._id, {$set: req.body}, (err, event) => {
-        if(err){
+router.put('/events/:_id/update', upload.single('eventImage'), passport.authenticate('jwt', {session: false}), (req, res, next) => {
+    let updateEvent = req.body;
+    let img_path = '';
+    if (req.file) {
+        updateEvent.eventImage = req.file.path;
+        Event.getEventFilePathByEventId(req.params._id, (err, path) => {
+            if (err) {
+                res.json({success: false, msg: 'Failed to get image path', error: err})
+            } else {
+                img_path = path.eventImage;
+            }
+        })
+    }
+    Event.updateEvent(req.params._id, {$set: updateEvent}, (err, event) => {
+        if (err) {
             res.json({success: false, msg: 'Failed to update event', error: err})
         } else {
             res.json({
                 success: true,
                 msg: 'Event updated',
-            })
+            });
+            if(img_path) {
+                fs.unlink(img_path, (err) => {
+                    if(err) {
+                        console.log(err);
+                    }
+                });
+            }
         }
     })
 });
