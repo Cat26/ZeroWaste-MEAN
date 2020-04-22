@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const UserSchema = require('../models/user').UserSchema;
+const UserSchema = mongoose.model('User').schema;
 
 const EventSchema = mongoose.Schema({
     name: {
@@ -11,7 +11,7 @@ const EventSchema = mongoose.Schema({
     description: {
         type: String,
         required: true,
-        maxlength: 220,
+        maxlength: 500,
         minlength: 10
     },
     eventImage: {
@@ -69,4 +69,8 @@ module.exports.deleteEvent = function (idEvent, callback) {
 
 module.exports.getUserEvents = function (userId, callback) {
     Event.find({ 'owner._id': userId }, callback).select('-owner.password');
+};
+
+module.exports.getEventFilePathByEventId = function (idEvent, callback) {
+    Event.findById(idEvent, 'eventImage', callback);
 };

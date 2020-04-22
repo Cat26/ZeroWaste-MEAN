@@ -9,15 +9,20 @@ import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { EventsComponent } from './components/events/events.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { FormsModule } from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { HttpClientModule} from "@angular/common/http";
 
 import { ValidateService } from "./services/validate/validate.service";
 import { AuthService } from "./services/auth/auth.service";
+import { EmitEventService } from "./services/emitter/emit-event.service";
 import { FlashMessagesModule } from "angular2-flash-messages";
 import { EventsListComponent } from './components/events/events-list/events-list.component';
 import { EventItemComponent } from './components/events/events-list/event-item/event-item.component';
 import { EventsService } from "./services/events/events.service";
+import { UserEventsComponent } from './components/profile/user-events/user-events.component';
+import { UserEventsListComponent } from './components/profile/user-events/user-events-list/user-events-list.component';
+import { UserEventFormComponent } from './components/profile/user-events/user-event-form/user-event-form.component';
+import { UserEventItemComponent } from './components/profile/user-events/user-events-list/user-event-item/user-event-item.component';
 
 @NgModule({
   declarations: [
@@ -29,19 +34,25 @@ import { EventsService } from "./services/events/events.service";
     EventsComponent,
     ProfileComponent,
     EventsListComponent,
-    EventItemComponent
+    EventItemComponent,
+    UserEventsComponent,
+    UserEventsListComponent,
+    UserEventFormComponent,
+    UserEventItemComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    FlashMessagesModule.forRoot()
+    FlashMessagesModule.forRoot(),
+    ReactiveFormsModule,
   ],
   providers: [
     ValidateService,
     AuthService,
-    EventsService
+    EventsService,
+    EmitEventService
   ],
   bootstrap: [AppComponent]
 })

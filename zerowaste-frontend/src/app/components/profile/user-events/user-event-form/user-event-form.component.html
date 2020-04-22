@@ -1,0 +1,65 @@
+<div className="card card-body mt-4 mb-4">
+  <form [formGroup]="eventForm">
+    <div class="form-group">
+      <label>Event Name</label>
+      <input
+        class="form-control"
+        type="text"
+        name="name"
+        formControlName="name"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label>Event description</label>
+      <textarea
+        class="form-control"
+        type="text"
+        name="description"
+        formControlName="description"
+        maxlength="500"
+        required></textarea>
+    </div>
+    <div class="form-group">
+      <label>Event date</label>
+      <input
+        class="form-control"
+        type="datetime-local"
+        name="eventDate"
+        formControlName="eventDate"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label>Event location</label>
+      <input
+        class="form-control"
+        type="text"
+        name="eventLocation"
+        formControlName="eventLocation"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label>Event photo</label>
+      <img class="img-fluid" *ngIf="!isNewEvent" src="{{ 'http://localhost:3000/' + eventUpdatePhoto }}">
+      <input
+        class="form-control"
+        type="file"
+        name="eventImage"
+        formControlName="eventImage"
+        accept="image/*"
+        (change)="onFileSelect($event)"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary" (click)="submitEventCall()">
+        Submit
+      </button>
+      <button type="submit" class="btn btn-danger" (click)="clearFormData()">
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>

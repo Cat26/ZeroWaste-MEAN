@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../../services/auth/auth.service";
-import { Router } from "@angular/router";
+import { EmitEventService } from "../../services/emitter/emit-event.service";
 
 @Component({
   selector: 'app-profile',
@@ -14,19 +14,58 @@ export class ProfileComponent implements OnInit {
     username: ''
   };
 
+  userEvents = [];
+
+  selectedOption = "events";
+
+  profileDisplayOptions = [
+    {
+      id: 1,
+      optionValue: "events",
+      optionName: "Events",
+      optionChecked: true
+    },
+    {
+      id: 2,
+      optionValue: "shops",
+      optionName: "Shops",
+      optionChecked: false
+    },
+    {
+      id: 3,
+      optionValue: "personal-goals",
+      optionName: "Personal Goals",
+      optionChecked: false
+    },
+
+  ];
+
+
   constructor(
     private authService: AuthService,
-    private router: Router
-  ) { }
+    private emitEventService: EmitEventService
+  ) {
+  }
 
   ngOnInit() {
+    this.getProfileData();
+    this.emitEventService.deleteCreateEventListener().subscribe(msg =>{
+      this.getProfileData();
+    })
+  }
+
+  onOptionChange(option) {
+    this.selectedOption = option.optionValue;
+  }
+
+  getProfileData() {
     this.authService.getProfile().subscribe((profile: any) => {
-      this.user = profile.user
-    },
+        this.user = profile.user;
+        this.userEvents = profile.events;
+      },
       error => {
         console.log(error);
         return false;
       });
   }
-
 }

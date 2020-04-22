@@ -1,0 +1,8 @@
+@media (min-width: 768px) {
+  .create-event-btn {
+    display: none;
+  }
+  #event-form {
+    display: inline-block;
+  }
+}

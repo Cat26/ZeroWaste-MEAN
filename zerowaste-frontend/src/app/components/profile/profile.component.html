@@ -1,7 +1,44 @@
-<div *ngIf="user">
-  <h2 class="page-header">{{user.name}}</h2>
-  <ul class="list-group">
-    <li class="list-group-item">Username: {{user.username}}</li>
-    <li class="list-group-item">Email: {{user.email}}</li>
-  </ul>
+<div class="container">
+  <div class="row" *ngIf="user">
+    <div class="col-md-3">
+      <div class="profile-avatar">
+        <img class="img-fluid" src="../../../assets/img/default_avatar.jpg" alt="user.name">
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="user-profile">
+        <div class="user-profile-data">
+          <h5>{{user.name}}</h5>
+          <h6>Username: {{user.username}}</h6>
+          <h6>Email: {{user.email}}</h6>
+          <div class="edit-profile">
+            <input type="submit" class="edit-profile-btn" value="Edit Profile">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <h2>calendar</h2>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary" *ngFor="let option of profileDisplayOptions">
+          <input
+            type="radio"
+            name="radiogroup"
+            [value]="option.optionValue"
+            [checked]="option.optionChecked"
+            (click)="onOptionChange(option)">
+          {{ option.optionName}}
+        </label>
+      </div>
+    </div>
+  </div>
+  <app-user-events *ngIf="selectedOption === 'events'" [userEvents]="userEvents"></app-user-events>
 </div>
+
+
+

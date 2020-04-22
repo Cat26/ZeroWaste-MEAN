@@ -1,0 +1,26 @@
+.profile-avatar {
+  padding: 15px;
+}
+.user-profile {
+  min-height: 150px
+}
+.user-profile-data {
+  position: absolute;
+  margin-top: 40px;
+}
+.edit-profile-btn {
+  border: none;
+  border-radius: 1.5rem;
+  width: 70%;
+  padding: 2%;
+  font-weight: 600;
+  color: #6c757d;
+  cursor: pointer;
+}
+.edit-profile {
+  position: absolute;
+  bottom: 70px;
+  width: 60%;
+  font-size: 10px;
+  left: 150px;
+}
