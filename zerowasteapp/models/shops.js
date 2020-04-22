@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const UserSchema = require('../models/user').UserSchema;
-const AddressSchema = require('../models/address').AddressSchema;
+// const AddressSchema = require('../models/address').AddressSchema;
 
 const ShopSchema = mongoose.Schema({
     name: {
@@ -48,3 +48,11 @@ const Shop = module.exports = mongoose.model('Shop', ShopSchema);
 module.exports.addShop = function (newShop, callback) {
     newShop.save(callback);
 };
+
+module.exports.udateShopInfo = function (idShop, updateShopInfo, callback) {
+    Shop.findByIdAndUpdate(idShop, updateShopInfo, callback);
+}
+
+module.exports.deleteShop = function (idShop, callback) {
+    Shop.findByIdAndDelete(idShop, callback)
+}
