@@ -21,8 +21,8 @@ export class EventItemComponent implements OnInit {
   }
 
   formatDate(date) {
-    let formatedDate = moment(date).format('LLLL')
-    return formatedDate
+    let formatedDate = moment(date).format('LLLL');
+    return formatedDate;
   }
 
 }
