@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const UserSchema = require('../models/user').UserSchema;
+const UserSchema = mongoose.model('User').schema;
 
 const EventSchema = mongoose.Schema({
     name: {
