@@ -220,10 +220,10 @@ router.post('/newShop', (req, res) => {
         email: req.body.email,
         phoneNumber: req.body.phoneNumber,
         rating: req.body.rating,
-        createAt: req.body.createAt,
-        uploadAt: req.body.uploadAt,
+        createdAt: req.body.createdAt,
+        updatedAt: req.body.updatedAt,
         idUser: req.user,
-        enable: req.body.enabled
+        enabled: req.body.enabled
     });
 
     Shop.addShop(newShop, (err, shop) =>{
