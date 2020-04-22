@@ -45,3 +45,7 @@ module.exports.addAddress = function (newAddress, callback) {
 module.exports.deleteAddress = function (idAddress, callback) {
     Address.findByIdAndDelete(idAddress, callback);
 };
+
+module.exports.updateAddress = function (idAddress, updateAdress, callback) {
+    Address.findByIdAndUpdate(idAddress, updateAdress, callback);
+};
