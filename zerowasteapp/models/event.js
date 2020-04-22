@@ -52,7 +52,7 @@ const EventSchema = mongoose.Schema({
 const Event = module.exports = mongoose.model('Event', EventSchema);
 
 module.exports.getAllEvents = function (callback) {
-    Event.find(callback).select('-owner.password');
+    Event.find(callback).select('-owner.password').sort({eventDate: 'desc'});
 };
 
 module.exports.addEvent = function (newEvent, callback) {
@@ -74,3 +74,8 @@ module.exports.getUserEvents = function (userId, callback) {
 module.exports.getEventFilePathByEventId = function (idEvent, callback) {
     Event.findById(idEvent, 'eventImage', callback);
 };
+
+module.exports.getThreeNewestEvent = function (callback) {
+    Event.find(callback).select('-owner.password').limit(3).sort({eventDate: 'desc'})
+};
+

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient } from "@angular/common/http";
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { AuthService } from "../auth/auth.service";
 
 @Injectable({
@@ -49,6 +49,15 @@ export class EventsService {
         'Authorization': this.authService.authToken
       })
     };
-    return this.http.put('http://localhost:3000/categories/events/' + eventId + '/update', eventData, httpOptions)
+    return this.http.put('http://localhost:3000/categories/events/' + eventId + '/update', eventData, httpOptions);
+  }
+
+  getThreeNewestItem() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.get('http://localhost:3000/categories/newest', httpOptions);
   }
 }

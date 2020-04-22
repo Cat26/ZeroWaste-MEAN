@@ -23,6 +23,8 @@ import { UserEventsComponent } from './components/profile/user-events/user-event
 import { UserEventsListComponent } from './components/profile/user-events/user-events-list/user-events-list.component';
 import { UserEventFormComponent } from './components/profile/user-events/user-event-form/user-event-form.component';
 import { UserEventItemComponent } from './components/profile/user-events/user-events-list/user-event-item/user-event-item.component';
+import { HomeListComponent } from './components/home/home-list/home-list.component';
+import { HomeItemComponent } from './components/home/home-list/home-item/home-item.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { UserEventItemComponent } from './components/profile/user-events/user-ev
     UserEventsComponent,
     UserEventsListComponent,
     UserEventFormComponent,
-    UserEventItemComponent
+    UserEventItemComponent,
+    HomeListComponent,
+    HomeItemComponent
   ],
   imports: [
     BrowserModule,
