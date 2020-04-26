@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import * as moment from 'moment';
+import { AuthService } from '../../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-event-item',
@@ -12,10 +13,17 @@ export class EventItemComponent implements OnInit {
     description: string,
     eventImage: string,
     eventDate: string,
-    owner: {username: string},
-    _id: string};
+    likesUserList: [],
+    dislikesUserList: [],
+    participants: [],
+    owner: { username: string },
+    _id: string
+  };
 
-  constructor() { }
+  constructor(
+    public authService: AuthService
+  ) {
+  }
 
   ngOnInit(): void {
   }

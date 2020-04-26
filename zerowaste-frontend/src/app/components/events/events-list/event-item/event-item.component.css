@@ -1,0 +1,19 @@
+.manage-event-options {
+  display: inline-flex;
+}
+
+.event-likes-icon {
+  margin: 10px;
+}
+
+.events-likes-number {
+  margin-top: 10px;
+}
+
+.event-participants {
+  display: inherit;
+  margin-top: 10px;
+  margin-left: 150px;
+}
+
+
