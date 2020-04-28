@@ -9,11 +9,13 @@
         <p class="card-text">{{eventItem.description}}</p>
         <hr>
         <div class="manage-event-options">
-          <div *ngIf="authService.loggedIn()"><a href="#" class="btn btn-primary">Sign in</a></div>
-          <div *ngIf="!authService.loggedIn()"><a [routerLink]="['/register']" class="btn btn-primary">Log in or register to sign in for event</a></div>
+          <button *ngIf="authService.loggedIn() && !checkUserIdInParticipantsList()" (click)="signInToEvent()" class="btn btn-primary">Sign in</button>
+          <button *ngIf="authService.loggedIn() && checkUserIdInParticipantsList()" href="#" class="btn btn-primary">Sign out</button>
+          <a *ngIf="!authService.loggedIn()"[routerLink]="['/register']" class="btn btn-primary">Log in or register to sign in for event</a>
+          <button class="btn btn-warning event-participants"><fa-icon class="fa-lg" icon="user-friends"></fa-icon>Participants: {{ eventItem.participants.length}}</button>
           <fa-icon class="fa-lg event-likes-icon" icon="thumbs-up"></fa-icon><p class="events-likes-number">{{ eventItem.likesUserList.length}}</p>
           <fa-icon class="fa-lg event-likes-icon" icon="thumbs-down"></fa-icon><p class="events-likes-number">{{ eventItem.dislikesUserList.length}}</p>
-          <div class="event-participants"><fa-icon class="fa-lg" icon="user-friends"></fa-icon><p>Participants: {{ eventItem.participants.length}}</p></div>
+
         </div>
       </div>
     </div>
