@@ -12,9 +12,9 @@
           <button *ngIf="authService.loggedIn() && !checkUserIdInParticipantsList()" (click)="signInToEvent()" class="btn btn-primary">Sign in</button>
           <button *ngIf="authService.loggedIn() && checkUserIdInParticipantsList()" href="#" class="btn btn-primary">Sign out</button>
           <a *ngIf="!authService.loggedIn()"[routerLink]="['/register']" class="btn btn-primary">Log in or register to sign in for event</a>
-          <button class="btn btn-warning event-participants"><fa-icon class="fa-lg" icon="user-friends"></fa-icon>Participants: {{ eventItem.participants.length}}</button>
-          <fa-icon class="fa-lg event-likes-icon" icon="thumbs-up"></fa-icon><p class="events-likes-number">{{ eventItem.likesUserList.length}}</p>
-          <fa-icon class="fa-lg event-likes-icon" icon="thumbs-down"></fa-icon><p class="events-likes-number">{{ eventItem.dislikesUserList.length}}</p>
+          <button class="btn btn-warning event-participants"><fa-icon class="fa-lg" icon="user-friends"></fa-icon>Participants: {{ eventItem.participants ? eventItem.participants.length : 0 }}</button>
+          <fa-icon class="fa-lg event-likes-icon" icon="thumbs-up"></fa-icon><p class="events-likes-number">{{ eventItem.likesUserList ? eventItem.likesUserList.length : 0 }}</p>
+          <fa-icon class="fa-lg event-likes-icon" icon="thumbs-down"></fa-icon><p class="events-likes-number">{{ eventItem.dislikesUserList ? eventItem.dislikesUserList.length : 0 }}</p>
 
         </div>
       </div>

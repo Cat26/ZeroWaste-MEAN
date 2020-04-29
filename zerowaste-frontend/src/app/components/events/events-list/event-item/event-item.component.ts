@@ -3,6 +3,7 @@ import * as moment from 'moment';
 import { AuthService } from '../../../../services/auth/auth.service';
 import { EventsService } from "../../../../services/events/events.service";
 import { FlashMessagesService } from "angular2-flash-messages";
+import { EmitEventService } from "../../../../services/emitter/emit-event.service";
 
 @Component({
   selector: 'app-event-item',
@@ -11,6 +12,7 @@ import { FlashMessagesService } from "angular2-flash-messages";
 })
 export class EventItemComponent implements OnInit {
   loggedInUserId: string;
+  isInitCall = true;
   @Input() eventItem: {
     name: string,
     description: string,
@@ -26,7 +28,8 @@ export class EventItemComponent implements OnInit {
   constructor(
     public authService: AuthService,
     private eventService: EventsService,
-    private flashMessage: FlashMessagesService
+    private flashMessage: FlashMessagesService,
+    private emitEventService: EmitEventService
   ) {
   }
 
@@ -39,29 +42,34 @@ export class EventItemComponent implements OnInit {
     this.loggedInUserId = this.authService.loggedIn() ? user.id : null;
   }
 
-  checkUserIdInParticipantsList () {
+  checkUserIdInParticipantsList() {
     this.getLoggedUserId();
     return this.eventItem.participants.includes(this.loggedInUserId);
   }
 
-  signInToEvent () {
+  signInToEvent() {
     let participantsList = [this.loggedInUserId].concat(this.eventItem.participants);
-    // this.eventService.updateEvent(this.eventItem._id, {}).subscribe(
-    //   (res: any) => {
-    //     if (res.success) {
-    //       this.flashMessage.show(
-    //         res.msg,
-    //         {cssClass: 'alert-success', timeout: 3000}
-    //       );
-    //     } else {
-    //       this.flashMessage.show(
-    //         res.msg,
-    //         {cssClass: 'alert-danger', timeout: 5000}
-    //       );
-    //       console.log(res.error)
-    //     }
-    //   }
-    // )
+    console.log(participantsList)
+    this.eventService.updateEvent(this.eventItem._id, {"participants": participantsList}).subscribe(
+      (res: any) => {
+        if (res.success) {
+          this.flashMessage.show(
+            res.msg,
+            {cssClass: 'alert-success', timeout: 3000}
+          );
+        } else {
+          this.flashMessage.show(
+            res.msg,
+            {cssClass: 'alert-danger', timeout: 5000}
+          );
+          console.log(res.error)
+        }
+      }
+    )
+  }
+
+  signOutFromEvent() {
+
   }
 
   formatDate(date) {
