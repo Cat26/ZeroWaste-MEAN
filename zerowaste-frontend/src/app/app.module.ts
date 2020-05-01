@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faThumbsDown, faThumbsUp, faUserFriends } from '@fortawesome/free-solid-svg-icons';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -9,8 +12,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { EventsComponent } from './components/events/events.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { HttpClientModule} from "@angular/common/http";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule } from "@angular/common/http";
 
 import { ValidateService } from "./services/validate/validate.service";
 import { AuthService } from "./services/auth/auth.service";
@@ -51,6 +54,7 @@ import { HomeItemComponent } from './components/home/home-list/home-item/home-it
     FormsModule,
     FlashMessagesModule.forRoot(),
     ReactiveFormsModule,
+    FontAwesomeModule
   ],
   providers: [
     ValidateService,
@@ -60,4 +64,8 @@ import { HomeItemComponent } from './components/home/home-list/home-item/home-it
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(library: FaIconLibrary) {
+    library.addIcons(faThumbsDown, faThumbsUp, faUserFriends);
+  }
+}

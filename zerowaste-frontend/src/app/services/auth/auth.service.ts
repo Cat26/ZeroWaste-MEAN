@@ -52,6 +52,11 @@ export class AuthService {
     this.authToken = token;
   }
 
+  loadUser() {
+    const user = localStorage.getItem('user');
+    this.user = user;
+  }
+
   loggedIn() {
     return localStorage.getItem('id_token') !== null;
   }

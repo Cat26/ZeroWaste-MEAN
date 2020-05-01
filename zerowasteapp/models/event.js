@@ -2,6 +2,18 @@ const mongoose = require('mongoose');
 const UserSchema = mongoose.model('User').schema;
 
 const EventSchema = mongoose.Schema({
+    created_at: {
+        type: Date,
+        default: Date.now()
+    },
+    updated_at: {
+        type: Date,
+        default: null
+    },
+    enabled: {
+        type: Boolean,
+        default: null
+    },
     name: {
         type: String,
         required: true,

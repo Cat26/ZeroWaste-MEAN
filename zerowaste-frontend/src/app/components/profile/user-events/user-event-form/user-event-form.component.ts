@@ -58,7 +58,6 @@ export class UserEventFormComponent implements OnInit {
     this.isNewEvent = false;
     this.eventUpdatePhoto = updateEventData.eventImage;
     this.eventUpdateId = updateEventData._id;
-    // this.eventFile = undefined;
     this.eventForm.patchValue({
       name: updateEventData.name,
       description: updateEventData.description,
