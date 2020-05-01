@@ -49,12 +49,12 @@ export class EventItemComponent implements OnInit {
 
   signInToEvent() {
     let participantsList = [this.loggedInUserId].concat(this.eventItem.participants);
-    console.log(participantsList)
     this.eventService.updateEvent(this.eventItem._id, {"participants": participantsList}).subscribe(
       (res: any) => {
         if (res.success) {
+          this.emitEventService.emitUpdateEvent("event updated");
           this.flashMessage.show(
-            res.msg,
+            "You signed in to " + this.eventItem.name + this.eventItem.eventDate,
             {cssClass: 'alert-success', timeout: 3000}
           );
         } else {
@@ -69,6 +69,26 @@ export class EventItemComponent implements OnInit {
   }
 
   signOutFromEvent() {
+    let userIdListIndex = this.eventItem.participants.indexOf(this.loggedInUserId);
+    let participantsList = [...this.eventItem.participants];
+    participantsList.splice(userIdListIndex, 1);
+    this.eventService.updateEvent(this.eventItem._id, {"participants": participantsList}).subscribe(
+      (res: any) => {
+        if (res.success) {
+          this.emitEventService.emitUpdateEvent("event updated");
+          this.flashMessage.show(
+            "You signed out from " + this.eventItem.name + this.formatDate(this.eventItem.eventDate),
+            {cssClass: 'alert-success', timeout: 3000}
+          );
+        } else {
+          this.flashMessage.show(
+            res.msg,
+            {cssClass: 'alert-danger', timeout: 5000}
+          );
+          console.log(res.error)
+        }
+      }
+    )
 
   }
 

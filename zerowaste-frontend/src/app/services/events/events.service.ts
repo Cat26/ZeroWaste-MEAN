@@ -44,6 +44,7 @@ export class EventsService {
   }
 
   updateEvent(eventId, eventData) {
+    this.authService.loadToken();
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization': this.authService.authToken
@@ -53,6 +54,7 @@ export class EventsService {
   }
 
   getThreeNewestItem() {
+    this.authService.loadToken();
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
