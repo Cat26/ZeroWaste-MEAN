@@ -1,5 +1,18 @@
+.event-item {
+  margin-bottom: 30px;
+}
+
 .manage-event-options {
   display: inline-flex;
+}
+
+@media (max-width: 450px){
+  .manage-event-options {
+    display: block;
+  }
+  .manage-event-options button, a {
+    width: 100%;
+  }
 }
 
 .event-likes-icon {
@@ -9,6 +22,19 @@
 .events-likes-number {
   margin-top: 10px;
 }
+
+.event-likes, .event-dislikes {
+  display: inline-flex;
+}
+
+.event-clicked {
+  color: #007bff;
+}
+
+.click-event-enabled {
+  cursor: pointer;
+}
+
 
 
 

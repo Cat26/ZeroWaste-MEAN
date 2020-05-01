@@ -1,6 +1,6 @@
 <div class="row">
-  <div class="col-lg-8">
-    <div class="card {{ 'event-' + eventItem._id }}">
+  <div class="col-md-8">
+    <div class="card event-item {{ 'event-' + eventItem._id }}">
       <img src="{{ 'http://localhost:3000/' + eventItem.eventImage }}" class="card-img-top" alt="{{ eventItem.name }}"/>
       <div class="card-body">
         <h4 class="card-title">{{ eventItem.name }}</h4>
@@ -9,15 +9,39 @@
         <p class="card-text">{{eventItem.description}}</p>
         <hr>
         <div class="manage-event-options">
-          <button *ngIf="authService.loggedIn() && !checkUserIdInParticipantsList()" (click)="signInToEvent()" class="btn btn-primary">Sign in</button>
-          <button *ngIf="authService.loggedIn() && checkUserIdInParticipantsList()" (click)="signOutFromEvent()" class="btn btn-primary">Sign out</button>
-          <a *ngIf="!authService.loggedIn()"[routerLink]="['/register']" class="btn btn-primary">Log in or register to sign in for event</a>
-          <button class="btn btn-warning event-participants"><fa-icon class="fa-lg" icon="user-friends"></fa-icon>Participants: {{ eventItem.participants ? eventItem.participants.length : 0 }}</button>
-          <fa-icon class="fa-lg event-likes-icon" icon="thumbs-up"></fa-icon><p class="events-likes-number">{{ eventItem.likesUserList ? eventItem.likesUserList.length : 0 }}</p>
-          <fa-icon class="fa-lg event-likes-icon" icon="thumbs-down"></fa-icon><p class="events-likes-number">{{ eventItem.dislikesUserList ? eventItem.dislikesUserList.length : 0 }}</p>
+          <button
+            *ngIf="authService.loggedIn() && !checkUserIdInList(eventItem.participants)"
+            (click)="signInToEvent()" class="btn btn-primary">
+            Sign in
+          </button>
+          <button
+            *ngIf="authService.loggedIn() && checkUserIdInList(eventItem.participants)"
+            (click)="signOutFromEvent()" class="btn btn-primary">
+            Sign out
+          </button>
+          <a *ngIf="!authService.loggedIn()"[routerLink]="['/register']"
+             class="btn btn-primary">
+            Log in or register to sign in
+          </a>
+          <button class="btn btn-warning event-participants"><fa-icon class="fa-lg" icon="user-friends"></fa-icon>Participants: {{ eventItem.participants.length }}</button>
+          <div
+            class="event-likes"
+            [ngClass]="{'event-clicked': checkUserIdInList(eventItem.likesUserList)}"
+            (click)="!checkUserIdInList(eventItem.likesUserList) ? likeEvent() : resetLikeEvent()">
+            <fa-icon class="fa-lg event-likes-icon" icon="thumbs-up" [ngClass]="{'click-event-enabled': !checkUserIdInList(eventItem.dislikesUserList)}"></fa-icon>
+            <p class="events-likes-number">{{ eventItem.likesUserList.length }}</p>
+          </div>
+          <div
+            class="event-dislikes"
+            [ngClass]="{'event-clicked': checkUserIdInList(eventItem.dislikesUserList)}"
+            (click)="!checkUserIdInList(eventItem.dislikesUserList) ? dislikeEvent() : resetDislikeEvent()">
+            <fa-icon class="fa-lg event-likes-icon" icon="thumbs-down" [ngClass]="{'click-event-enabled': !checkUserIdInList(eventItem.likesUserList)}"></fa-icon>
+            <p class="events-likes-number">{{ eventItem.dislikesUserList.length }}</p>
+          </div>
 
         </div>
       </div>
     </div>
   </div>
 </div>
+
