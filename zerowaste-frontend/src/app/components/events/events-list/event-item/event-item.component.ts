@@ -12,7 +12,6 @@ import { EmitEventService } from "../../../../services/emitter/emit-event.servic
 })
 export class EventItemComponent implements OnInit {
   loggedInUserId: string;
-  isInitCall = true;
   @Input() eventItem: {
     name: string,
     description: string,
@@ -42,9 +41,9 @@ export class EventItemComponent implements OnInit {
     this.loggedInUserId = this.authService.loggedIn() ? user.id : null;
   }
 
-  checkUserIdInParticipantsList() {
+  checkUserIdInList(usersIdList) {
     this.getLoggedUserId();
-    return this.eventItem.participants.includes(this.loggedInUserId);
+    return usersIdList.includes(this.loggedInUserId);
   }
 
   signInToEvent() {
@@ -54,7 +53,7 @@ export class EventItemComponent implements OnInit {
         if (res.success) {
           this.emitEventService.emitUpdateEvent("event updated");
           this.flashMessage.show(
-            "You signed in to " + this.eventItem.name + this.eventItem.eventDate,
+            `You signed in to ${this.eventItem.name} (${this.eventItem.eventDate})`,
             {cssClass: 'alert-success', timeout: 3000}
           );
         } else {
@@ -77,7 +76,7 @@ export class EventItemComponent implements OnInit {
         if (res.success) {
           this.emitEventService.emitUpdateEvent("event updated");
           this.flashMessage.show(
-            "You signed out from " + this.eventItem.name + this.formatDate(this.eventItem.eventDate),
+            `You signed out from ${this.eventItem.name} (${this.formatDate(this.eventItem.eventDate)})`,
             {cssClass: 'alert-success', timeout: 3000}
           );
         } else {
@@ -89,7 +88,98 @@ export class EventItemComponent implements OnInit {
         }
       }
     )
+  }
 
+  likeEvent() {
+    if(!this.checkUserIdInList(this.eventItem.dislikesUserList)) {
+      let likesList = [this.loggedInUserId].concat(this.eventItem.likesUserList);
+      this.eventService.updateEvent(this.eventItem._id, {"likesUserList": likesList}).subscribe(
+        (res: any) => {
+          if (res.success) {
+            this.emitEventService.emitUpdateEvent("event updated");
+            this.flashMessage.show(
+              `You liked ${this.eventItem.name} (${this.eventItem.eventDate})`,
+              {cssClass: 'alert-success', timeout: 3000}
+            );
+          } else {
+            this.flashMessage.show(
+              res.msg,
+              {cssClass: 'alert-danger', timeout: 5000}
+            );
+            console.log(res.error)
+          }
+        }
+      )
+    }
+  }
+
+  resetLikeEvent() {
+    let userIdListIndex = this.eventItem.likesUserList.indexOf(this.loggedInUserId);
+    let likesList = [...this.eventItem.likesUserList];
+    likesList.splice(userIdListIndex, 1);
+    this.eventService.updateEvent(this.eventItem._id, {"likesUserList": likesList}).subscribe(
+      (res: any) => {
+        if (res.success) {
+          this.emitEventService.emitUpdateEvent("event updated");
+          this.flashMessage.show(
+            `You reset your like in ${this.eventItem.name} (${this.formatDate(this.eventItem.eventDate)})`,
+            {cssClass: 'alert-success', timeout: 3000}
+          );
+        } else {
+          this.flashMessage.show(
+            res.msg,
+            {cssClass: 'alert-danger', timeout: 5000}
+          );
+          console.log(res.error)
+        }
+      }
+    )
+  }
+
+  dislikeEvent() {
+    if(!this.checkUserIdInList(this.eventItem.likesUserList)) {
+      let dislikesList = [this.loggedInUserId].concat(this.eventItem.dislikesUserList);
+      this.eventService.updateEvent(this.eventItem._id, {"dislikesUserList": dislikesList}).subscribe(
+        (res: any) => {
+          if (res.success) {
+            this.emitEventService.emitUpdateEvent("event updated");
+            this.flashMessage.show(
+              `You disliked ${this.eventItem.name} (${this.eventItem.eventDate})`,
+              {cssClass: 'alert-success', timeout: 3000}
+            );
+          } else {
+            this.flashMessage.show(
+              res.msg,
+              {cssClass: 'alert-danger', timeout: 5000}
+            );
+            console.log(res.error)
+          }
+        }
+      )
+    }
+  }
+
+  resetDislikeEvent() {
+    let userIdListIndex = this.eventItem.dislikesUserList.indexOf(this.loggedInUserId);
+    let dislikesList = [...this.eventItem.dislikesUserList];
+    dislikesList.splice(userIdListIndex, 1);
+    this.eventService.updateEvent(this.eventItem._id, {"dislikesUserList": dislikesList}).subscribe(
+      (res: any) => {
+        if (res.success) {
+          this.emitEventService.emitUpdateEvent("event updated");
+          this.flashMessage.show(
+            `You reset your dislike in ${this.eventItem.name} (${this.formatDate(this.eventItem.eventDate)})`,
+            {cssClass: 'alert-success', timeout: 3000}
+          );
+        } else {
+          this.flashMessage.show(
+            res.msg,
+            {cssClass: 'alert-danger', timeout: 5000}
+          );
+          console.log(res.error)
+        }
+      }
+    )
   }
 
   formatDate(date) {
