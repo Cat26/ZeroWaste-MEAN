@@ -91,3 +91,22 @@ module.exports.getThreeNewestEvent = function (callback) {
     Event.find(callback).select('-owner.password').limit(3).sort({eventDate: 'desc'})
 };
 
+module.exports.sortEventsDescending = function (callback) {
+    Event.find(callback).select('-owner.password').sort({eventDate: 'desc'})
+};
+
+module.exports.sortEventsAscending = function (callback) {
+    Event.find(callback).select('-owner.password').sort({eventDate: 'asc'})
+};
+
+module.exports.filterByOwnerUsername = function (filter, callback) {
+    Event.find( { 'owner.username' : { "$regex": filter, "$options": "i"} }, callback)
+};
+
+module.exports.filterByEventName = function (filter, callback) {
+    Event.find( { 'name' : { "$regex": filter, "$options": "i"} }, callback)
+};
+
+module.exports.filterByEventDescription = function (filter, callback) {
+    Event.find( { 'description' : { "$regex": filter, "$options": "i"} }, callback)
+};

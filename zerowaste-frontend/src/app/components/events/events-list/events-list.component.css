@@ -1,0 +1,9 @@
+.events-list {
+  margin-top: 50px;
+}
+
+.no-events {
+  font-size: 20px;
+  color: red;
+  font-weight: bold;
+}

@@ -121,4 +121,65 @@ router.get('/newest', (req, res, next) => {
     })
 });
 
+router.get('/events/sort-asc', (req, res, next) => {
+    Event.sortEventsAscending((err, events) => {
+        if(err) {
+            res.json({success: false, msg: 'Failed to sort ascending', error: err})
+        } else {
+            res.json({
+                events: events
+            })
+        }
+    })
+});
+
+router.get('/events/sort-desc', (req, res, next) => {
+    Event.sortEventsDescending((err, events) => {
+        if(err) {
+            res.json({success: false, msg: 'Failed to sort descending', error: err})
+        } else {
+            res.json({
+                events: events
+            })
+        }
+    })
+});
+
+router.get('/events/filter/owner/:filter', (req, res, next) => {
+    Event.filterByOwnerUsername(req.params.filter, (err, events) => {
+        if(err) {
+            res.json({success: false, msg: 'Failed to filter by owner username', error: err})
+        } else {
+            res.json({
+                events: events
+            })
+        }
+    })
+});
+
+router.get('/events/filter/eventName/:filter', (req, res, next) => {
+    Event.filterByEventName(req.params.filter, (err, events) => {
+        if(err) {
+            res.json({success: false, msg: 'Failed to filter by owner event name', error: err})
+        } else {
+            res.json({
+                events: events
+            })
+        }
+    })
+});
+
+router.get('/events/filter/eventDescription/:filter', (req, res, next) => {
+    Event.filterByEventDescription(req.params.filter, (err, events) => {
+        if(err) {
+            res.json({success: false, msg: 'Failed to filter by owner event description', error: err})
+        } else {
+            res.json({
+                events: events
+            })
+        }
+    })
+});
+
+
 module.exports = router;

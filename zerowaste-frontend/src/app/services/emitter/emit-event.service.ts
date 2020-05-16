@@ -7,6 +7,7 @@ import { BehaviorSubject } from "rxjs";
 export class EmitEventService {
   private createDeleteActionEvent = new BehaviorSubject<string>('');
   private updateActionEvent = new BehaviorSubject<string>('');
+  private manageActionEvent = new BehaviorSubject<string>('');
 
   constructor() {
   }
@@ -23,7 +24,15 @@ export class EmitEventService {
     this.updateActionEvent.next(eventData);
   }
 
-  updateEventListener(){
+  updateEventListener() {
     return this.updateActionEvent.asObservable();
+  }
+
+  emitManageEvents(manageQuery) {
+    this.manageActionEvent.next(manageQuery)
+  }
+
+  manageEventsListener() {
+    return this.manageActionEvent.asObservable();
   }
 }
