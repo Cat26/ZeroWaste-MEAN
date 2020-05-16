@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faThumbsDown, faThumbsUp, faUserFriends } from '@fortawesome/free-solid-svg-icons';
+import { faThumbsDown, faThumbsUp, faUserFriends, faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -28,6 +28,7 @@ import { UserEventFormComponent } from './components/profile/user-events/user-ev
 import { UserEventItemComponent } from './components/profile/user-events/user-events-list/user-event-item/user-event-item.component';
 import { HomeListComponent } from './components/home/home-list/home-list.component';
 import { HomeItemComponent } from './components/home/home-list/home-item/home-item.component';
+import { EventsManagerComponent } from './components/events/events-manager/events-manager.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { HomeItemComponent } from './components/home/home-list/home-item/home-it
     UserEventFormComponent,
     UserEventItemComponent,
     HomeListComponent,
-    HomeItemComponent
+    HomeItemComponent,
+    EventsManagerComponent
   ],
   imports: [
     BrowserModule,
@@ -66,6 +68,6 @@ import { HomeItemComponent } from './components/home/home-list/home-item/home-it
 })
 export class AppModule {
   constructor(library: FaIconLibrary) {
-    library.addIcons(faThumbsDown, faThumbsUp, faUserFriends);
+    library.addIcons(faThumbsDown, faThumbsUp, faUserFriends, faArrowDown, faArrowUp);
   }
 }

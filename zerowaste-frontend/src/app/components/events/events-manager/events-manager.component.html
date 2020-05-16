@@ -1,0 +1,24 @@
+<div class="events-manager">
+  <h3>Events Manager</h3>
+  <p>Sort Events by date</p>
+  <div class="btn-group events-manager-item" role="group" aria-label="Basic example">
+    <button type="button" class="btn btn-secondary" (click)="sortAscendingQuery()"><fa-icon icon="arrow-up"></fa-icon></button>
+    <button type="button" class="btn btn-secondary" (click)="sortDescendingQuery()"><fa-icon icon="arrow-down"></fa-icon></button>
+  </div>
+  <p>Filter Events</p>
+  <div class="input-group mb-3 events-manager-item">
+    <div class="input-group-prepend">
+      <select class="custom-select btn-outline-secondary" [(ngModel)]="selectedFilter">
+        <option value="owner" selected>Owner</option>
+        <option value="name">Name</option>
+        <option value="description">Description</option>
+      </select>
+    </div>
+    <input type="text" class="form-control" aria-label="Text input with dropdown button" [(ngModel)]="query">
+    <button class="btn btn-outline-secondary" type="button" (click)="filterQuery()" [disabled]="!query">search</button>
+  </div>
+  <div class="events-manager-item">
+    <button type="button" class="btn btn-secondary" (click)="resetQuery()">Reset to full list</button>
+  </div>
+</div>
+

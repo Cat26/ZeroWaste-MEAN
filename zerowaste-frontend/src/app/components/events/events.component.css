@@ -1,0 +1,15 @@
+@media (min-width: 768px) {
+  .menage-events-btn {
+    display: none;
+  }
+  #event-manager {
+    display: inline-block;
+  }
+}
+
+.menage-events-btn {
+  position: fixed;
+  top: 10px;
+  z-index: 1020;
+  right: 100px;
+}
