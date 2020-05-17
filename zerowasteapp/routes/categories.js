@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Event = require('../models/event');
+const Address = require('../models/address');
+const Shop = require('../models/shops');
 const passport = require('passport');
 const multer = require('multer');
 const fs = require('fs');
@@ -238,3 +240,5 @@ router.post('/newShop', (req, res) => {
         }
     })
 });
+
+module.exports = router;

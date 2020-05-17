@@ -20,6 +20,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { EventsComponent } from './components/events/events.component';
+import { ShopsComponent } from "./components/shops/shops.component";
 import { ProfileComponent } from './components/profile/profile.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
@@ -43,6 +44,11 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { CalendarItemModalComponent } from './components/profile/user-calendar/calendar-item-modal/calendar-item-modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from "@angular/material/button";
+import {UserShopsComponent} from "./components/profile/user-shops/user-shops.component";
+import {UserShopsListComponent} from "./components/profile/user-shops/user-shops-list/user-shops-list.component";
+import {UserShopsItemComponent} from "./components/profile/user-shops/user-shops-list/user-shops-item/user-shops-item.component";
+import {UserShopFormComponent} from "./components/profile/user-shops/user-shop-form/user-shop-form.component";
+import {ShopsService} from "./services/shops/shops.service";
 
 @NgModule({
   declarations: [
@@ -52,6 +58,7 @@ import { MatButtonModule } from "@angular/material/button";
     RegisterComponent,
     HomeComponent,
     EventsComponent,
+    ShopsComponent,
     ProfileComponent,
     EventsListComponent,
     EventItemComponent,
@@ -59,7 +66,10 @@ import { MatButtonModule } from "@angular/material/button";
     UserEventsListComponent,
     UserEventFormComponent,
     UserEventItemComponent,
-    HomeListComponent,
+    UserShopsComponent,
+    UserShopsListComponent,
+    UserShopsItemComponent,
+    UserShopFormComponent,
     HomeItemComponent,
     EventsManagerComponent,
     UserCalendarComponent,
@@ -81,6 +91,7 @@ import { MatButtonModule } from "@angular/material/button";
     ValidateService,
     AuthService,
     EventsService,
+    ShopsService,
     EmitEventService
   ],
   bootstrap: [AppComponent]
