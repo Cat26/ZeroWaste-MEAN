@@ -11,6 +11,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { EventsComponent } from './components/events/events.component';
+import { ShopsComponent } from "./components/shops/shops.component";
 import { ProfileComponent } from './components/profile/profile.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
@@ -26,9 +27,13 @@ import { UserEventsComponent } from './components/profile/user-events/user-event
 import { UserEventsListComponent } from './components/profile/user-events/user-events-list/user-events-list.component';
 import { UserEventFormComponent } from './components/profile/user-events/user-event-form/user-event-form.component';
 import { UserEventItemComponent } from './components/profile/user-events/user-events-list/user-event-item/user-event-item.component';
-import { HomeListComponent } from './components/home/home-list/home-list.component';
-import { HomeItemComponent } from './components/home/home-list/home-item/home-item.component';
+import { HomeItemComponent } from './components/home/home-item/home-item.component';
 import { EventsManagerComponent } from './components/events/events-manager/events-manager.component';
+import {UserShopsComponent} from "./components/profile/user-shops/user-shops.component";
+import {UserShopsListComponent} from "./components/profile/user-shops/user-shops-list/user-shops-list.component";
+import {UserShopsItemComponent} from "./components/profile/user-shops/user-shops-list/user-shops-item/user-shops-item.component";
+import {UserShopFormComponent} from "./components/profile/user-shops/user-shop-form/user-shop-form.component";
+import {ShopsService} from "./services/shops/shops.service";
 
 @NgModule({
   declarations: [
@@ -38,6 +43,7 @@ import { EventsManagerComponent } from './components/events/events-manager/event
     RegisterComponent,
     HomeComponent,
     EventsComponent,
+    ShopsComponent,
     ProfileComponent,
     EventsListComponent,
     EventItemComponent,
@@ -45,7 +51,10 @@ import { EventsManagerComponent } from './components/events/events-manager/event
     UserEventsListComponent,
     UserEventFormComponent,
     UserEventItemComponent,
-    HomeListComponent,
+    UserShopsComponent,
+    UserShopsListComponent,
+    UserShopsItemComponent,
+    UserShopFormComponent,
     HomeItemComponent,
     EventsManagerComponent
   ],
@@ -62,6 +71,7 @@ import { EventsManagerComponent } from './components/events/events-manager/event
     ValidateService,
     AuthService,
     EventsService,
+    ShopsService,
     EmitEventService
   ],
   bootstrap: [AppComponent]

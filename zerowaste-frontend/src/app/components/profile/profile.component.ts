@@ -15,6 +15,7 @@ export class ProfileComponent implements OnInit {
   };
 
   userEvents = [];
+  userShops = [];
 
   selectedOption = "events";
 
