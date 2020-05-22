@@ -1,0 +1,15 @@
+<div class="user-calendar">
+  <h4>Welcome Back</h4>
+  <span class="calendar-title">Calendar Plan</span>
+  <hr>
+  <div class="calendar-today">
+    <p>Today</p>
+    <p>{{today}}</p>
+    <div class="todays-events" *ngFor="let event of todayEvents">
+      <p>{{getHourAndMinutes(event.eventDate)}}</p>
+    </div>
+  </div>
+  <div class="calendar-toggle-arrow">
+    <fa-icon class="fa-lg" icon="angle-down"></fa-icon>
+  </div>
+</div>

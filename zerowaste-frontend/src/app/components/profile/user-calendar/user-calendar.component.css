@@ -1,0 +1,26 @@
+.user-calendar {
+  background: #545454;
+  color: white;
+  padding: 25px;
+  margin-top: 10px;
+  box-shadow: 4px 4px 3px 2px #808080e0;
+}
+
+.calendar-title {
+  color: #d6d2d2;
+}
+
+.calendar-today {
+  background: #749a54;
+  padding: 7px;
+  font-size: 14px;
+}
+
+.calendar-today p {
+  padding: 0;
+}
+
+.calendar-toggle-arrow {
+  text-align: center;
+  margin-top: 10px;
+}

@@ -110,3 +110,7 @@ module.exports.filterByEventName = function (filter, callback) {
 module.exports.filterByEventDescription = function (filter, callback) {
     Event.find( { 'description' : { "$regex": filter, "$options": "i"} }, callback)
 };
+
+module.exports.getEventsToUserCalendar = function (userId, callback) {
+    Event.find({ 'participants': userId }, callback).select('eventDate _id name')
+};

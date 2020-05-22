@@ -72,5 +72,18 @@ router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,
     });
 });
 
+// User Calendar
+router.get('/calendar', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+    Event.getEventsToUserCalendar(req.user._id, (err, calendarEvents) => {
+        if(err) {
+            console.log('error')
+        } else {
+            res.json({
+                eventsCalendar: calendarEvents
+            });
+        }
+    });
+});
+
 
 module.exports = router;
