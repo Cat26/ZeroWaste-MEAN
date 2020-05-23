@@ -24,3 +24,31 @@
   text-align: center;
   margin-top: 10px;
 }
+
+.calendar-item-title {
+  margin: 0;
+}
+
+.today-events {
+  color: #545454;
+  font-weight: bold;
+}
+
+.today-date {
+  margin-left: 22px;
+}
+
+.other-signed-in-events {
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.calendar-event-name {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.event-detail-icon {
+  cursor: pointer;
+}
+

@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
 });
 
 const fileFilter = (req, file, callback) => {
-    if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg') {
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg') {
         callback(null, true);
     } else {
         callback(new Error('wrong file format'), false);
@@ -25,7 +25,7 @@ const upload = multer({storage: storage, fileFilter: fileFilter});
 
 
 // Events
-router.post('/events', upload.single('eventImage'), passport.authenticate('jwt', {session:false}), (req, res, next) => {
+router.post('/events', upload.single('eventImage'), passport.authenticate('jwt', {session: false}), (req, res, next) => {
     let newEvent = new Event({
         name: req.body.name,
         description: req.body.description,
@@ -36,7 +36,7 @@ router.post('/events', upload.single('eventImage'), passport.authenticate('jwt',
     });
 
     Event.addEvent(newEvent, (err, event) => {
-        if(err){
+        if (err) {
             res.json({success: false, msg: 'Failed to add event', error: err})
         } else {
             res.json({
@@ -68,9 +68,9 @@ router.put('/events/:_id/update', upload.single('eventImage'), passport.authenti
                 success: true,
                 msg: 'Event updated',
             });
-            if(img_path) {
+            if (img_path) {
                 fs.unlink(img_path, (err) => {
-                    if(err) {
+                    if (err) {
                         console.log(err);
                     }
                 });
@@ -79,15 +79,15 @@ router.put('/events/:_id/update', upload.single('eventImage'), passport.authenti
     })
 });
 
-router.delete('/events/:_id/delete', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+router.delete('/events/:_id/delete', passport.authenticate('jwt', {session: false}), (req, res, next) => {
     Event.deleteEvent(req.params._id, (err, event) => {
-        if(err){
+        if (err) {
             res.json({success: false, msg: 'Failed to delete events', error: err})
-        } else if(!event) {
+        } else if (!event) {
             res.status(400).send('Event not found')
         } else {
             fs.unlink(event.eventImage, (err) => {
-                if(err) {
+                if (err) {
                     console.log(err);
                 }
             });
@@ -96,9 +96,19 @@ router.delete('/events/:_id/delete', passport.authenticate('jwt', {session:false
     })
 });
 
+router.get('/events/:_id/details', (req, res, next) => {
+    Event.getEventById(req.params._id, (err, event) => {
+        if (err) {
+            res.json({success: false, msg: 'Failed to get event details', error: err})
+        } else {
+            res.json({event: event})
+        }
+    })
+});
+
 router.get('/events', (req, res, next) => {
     Event.getAllEvents((err, events) => {
-        if(err) {
+        if (err) {
             res.json({success: false, msg: 'Failed to get events', error: err})
         } else {
 
@@ -110,8 +120,8 @@ router.get('/events', (req, res, next) => {
 });
 
 router.get('/newest', (req, res, next) => {
-    Event.getThreeNewestEvent((err, events) =>{
-        if(err){
+    Event.getThreeNewestEvent((err, events) => {
+        if (err) {
             res.json({success: false, msg: 'Failed to get three newest events', error: err})
         } else {
             res.json({
@@ -123,7 +133,7 @@ router.get('/newest', (req, res, next) => {
 
 router.get('/events/sort-asc', (req, res, next) => {
     Event.sortEventsAscending((err, events) => {
-        if(err) {
+        if (err) {
             res.json({success: false, msg: 'Failed to sort ascending', error: err})
         } else {
             res.json({
@@ -135,7 +145,7 @@ router.get('/events/sort-asc', (req, res, next) => {
 
 router.get('/events/sort-desc', (req, res, next) => {
     Event.sortEventsDescending((err, events) => {
-        if(err) {
+        if (err) {
             res.json({success: false, msg: 'Failed to sort descending', error: err})
         } else {
             res.json({
@@ -147,7 +157,7 @@ router.get('/events/sort-desc', (req, res, next) => {
 
 router.get('/events/filter/owner/:filter', (req, res, next) => {
     Event.filterByOwnerUsername(req.params.filter, (err, events) => {
-        if(err) {
+        if (err) {
             res.json({success: false, msg: 'Failed to filter by owner username', error: err})
         } else {
             res.json({
@@ -159,7 +169,7 @@ router.get('/events/filter/owner/:filter', (req, res, next) => {
 
 router.get('/events/filter/eventName/:filter', (req, res, next) => {
     Event.filterByEventName(req.params.filter, (err, events) => {
-        if(err) {
+        if (err) {
             res.json({success: false, msg: 'Failed to filter by owner event name', error: err})
         } else {
             res.json({
@@ -171,7 +181,7 @@ router.get('/events/filter/eventName/:filter', (req, res, next) => {
 
 router.get('/events/filter/eventDescription/:filter', (req, res, next) => {
     Event.filterByEventDescription(req.params.filter, (err, events) => {
-        if(err) {
+        if (err) {
             res.json({success: false, msg: 'Failed to filter by owner event description', error: err})
         } else {
             res.json({

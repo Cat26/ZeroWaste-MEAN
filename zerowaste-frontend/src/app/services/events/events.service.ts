@@ -117,4 +117,13 @@ export class EventsService {
     };
     return this.http.get('http://localhost:3000/users/calendar', httpOptions);
   }
+
+  getEventsDetails(eventId) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.get('http://localhost:3000/categories/events/' + eventId + '/details', httpOptions);
+  }
 }

@@ -3,13 +3,33 @@
   <span class="calendar-title">Calendar Plan</span>
   <hr>
   <div class="calendar-today">
-    <p>Today</p>
-    <p>{{today}}</p>
-    <div class="todays-events" *ngFor="let event of todayEvents">
-      <p>{{getHourAndMinutes(event.eventDate)}}</p>
+    <div class="today-date">
+      <p class="calendar-item-title">Today</p>
+      <p>{{today}}</p>
+    </div>
+    <div class="today-events">
+      <ul *ngFor="let event of todayEvents">
+        <li>
+          <p class="calendar-item-title">{{getHourAndMinutes(event.eventDate)}}</p>
+          <p class="calendar-event-name">{{event.name}}</p>
+          <fa-icon class="fa-lg event-detail-icon" icon="info-circle" data-toggle="modal" data-target="#eventDetailModal" (click)="onClickEventInfo(event._id)"></fa-icon>
+        </li>
+      </ul>
     </div>
   </div>
+  <div class="other-signed-in-events" *ngIf="allEventsInCalendarVisible">
+    <ul *ngFor="let event of eventsInCalendar">
+      <li>
+        <p class="calendar-item-title">{{formatDate(event.eventDate)}}</p>
+        <p class="calendar-event-name">{{event.name}}</p>
+        <fa-icon class="fa-lg event-detail-icon" icon="info-circle" data-toggle="modal" data-target="#eventDetailModal" (click)="onClickEventInfo(event._id)"></fa-icon>
+      </li>
+    </ul>
+  </div>
   <div class="calendar-toggle-arrow">
-    <fa-icon class="fa-lg" icon="angle-down"></fa-icon>
+    <fa-icon (click)="showHideOtherEvents()" class="fa-lg" icon="angle-down" *ngIf="!allEventsInCalendarVisible"></fa-icon>
+    <fa-icon (click)="showHideOtherEvents()" class="fa-lg" icon="angle-up" *ngIf="allEventsInCalendarVisible"></fa-icon>
   </div>
 </div>
+
+<app-calendar-item-modal *ngIf="clickedEvent" [eventItem]="clickedEvent" class="modal" id="eventDetailModal"></app-calendar-item-modal>

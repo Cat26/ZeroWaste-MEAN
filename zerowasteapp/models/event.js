@@ -87,6 +87,10 @@ module.exports.getEventFilePathByEventId = function (idEvent, callback) {
     Event.findById(idEvent, 'eventImage', callback);
 };
 
+module.exports.getEventById = function (idEvent, callback) {
+    Event.findById(idEvent, callback);
+};
+
 module.exports.getThreeNewestEvent = function (callback) {
     Event.find(callback).select('-owner.password').limit(3).sort({eventDate: 'desc'})
 };

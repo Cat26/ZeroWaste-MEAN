@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EventsService } from "../../../services/events/events.service";
+import * as moment from "moment";
 
 @Component({
   selector: 'app-user-calendar',
@@ -9,9 +10,23 @@ import { EventsService } from "../../../services/events/events.service";
 export class UserCalendarComponent implements OnInit {
   today = new Date().toDateString();
   eventsInCalendar : [{eventDate: string, name: string, _id: string}];
-  todayEvents = [];
+  todayEvents : [{eventDate: string, name: string, _id: string}];
+  allEventsInCalendarVisible = false;
+  clickedEvent: {
+    name: string,
+    description: string,
+    eventImage: string,
+    eventDate: string,
+    likesUserList: string[],
+    dislikesUserList: string[],
+    participants: string[],
+    owner: { username: string },
+    _id: string
+  };
 
-  constructor(private eventService: EventsService) { }
+  constructor(
+    private eventService: EventsService,
+  ) { }
 
   ngOnInit(): void {
     this.getEventsToCalendar();
@@ -34,17 +49,34 @@ export class UserCalendarComponent implements OnInit {
     return `${hour} : ${additionalZero}${minutes}`;
   }
 
+  formatDate(date) {
+    let formatedDate = moment(date).format('LLLL');
+    return formatedDate;
+  }
+
   getEventsToCalendar() {
     this.eventService.getUserCalendarEvents().subscribe( (events: any) => {
       this.todayEvents = events.eventsCalendar.filter(event => this.compareDates(event.eventDate, this.today));
       this.eventsInCalendar = events.eventsCalendar.filter(event => !this.compareDates(event.eventDate, this.today));
-      console.log(this.todayEvents)
-      console.log(this.eventsInCalendar)
+      this.clickedEvent = events.eventsCalendar[0] ? events.eventsCalendar[0] : undefined;
 
     }, error => {
         console.log(error);
         return false;
       })
+  }
+
+  showHideOtherEvents() {
+    this.allEventsInCalendarVisible = !this.allEventsInCalendarVisible;
+  }
+
+  onClickEventInfo(eventId) {
+    this.eventService.getEventsDetails(eventId).subscribe((event: any) => {
+      this.clickedEvent = event.event;
+    }, error => {
+      console.log(error);
+      return false;
+    })
   }
 
 }

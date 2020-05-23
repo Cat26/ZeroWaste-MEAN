@@ -2,7 +2,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faThumbsDown, faThumbsUp, faUserFriends, faArrowDown, faArrowUp, faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import {
+  faThumbsDown,
+  faThumbsUp,
+  faUserFriends,
+  faArrowDown,
+  faArrowUp,
+  faAngleDown,
+  faAngleUp,
+  faInfoCircle
+} from '@fortawesome/free-solid-svg-icons';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,6 +39,10 @@ import { HomeListComponent } from './components/home/home-list/home-list.compone
 import { HomeItemComponent } from './components/home/home-list/home-item/home-item.component';
 import { EventsManagerComponent } from './components/events/events-manager/events-manager.component';
 import { UserCalendarComponent } from './components/profile/user-calendar/user-calendar.component';
+import { MatDialogModule } from "@angular/material/dialog";
+import { CalendarItemModalComponent } from './components/profile/user-calendar/calendar-item-modal/calendar-item-modal.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from "@angular/material/button";
 
 @NgModule({
   declarations: [
@@ -49,7 +62,8 @@ import { UserCalendarComponent } from './components/profile/user-calendar/user-c
     HomeListComponent,
     HomeItemComponent,
     EventsManagerComponent,
-    UserCalendarComponent
+    UserCalendarComponent,
+    CalendarItemModalComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +72,10 @@ import { UserCalendarComponent } from './components/profile/user-calendar/user-c
     FormsModule,
     FlashMessagesModule.forRoot(),
     ReactiveFormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatDialogModule,
+    BrowserAnimationsModule,
+    MatButtonModule
   ],
   providers: [
     ValidateService,
@@ -70,6 +87,6 @@ import { UserCalendarComponent } from './components/profile/user-calendar/user-c
 })
 export class AppModule {
   constructor(library: FaIconLibrary) {
-    library.addIcons(faThumbsDown, faThumbsUp, faUserFriends, faArrowDown, faArrowUp, faAngleDown);
+    library.addIcons(faThumbsDown, faThumbsUp, faUserFriends, faArrowDown, faArrowUp, faAngleDown, faAngleUp, faInfoCircle);
   }
 }
