@@ -9,7 +9,7 @@
 
     <!-- Modal body -->
     <div class="modal-body">
-      <app-event-item [eventItem]="eventItem"></app-event-item>
+      <app-event-item *ngIf="eventItem" [eventItem]="eventItem"></app-event-item>
     </div>
 
     <!-- Modal footer -->

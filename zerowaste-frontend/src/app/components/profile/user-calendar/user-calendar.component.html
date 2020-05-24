@@ -15,6 +15,7 @@
           <fa-icon class="fa-lg event-detail-icon" icon="info-circle" data-toggle="modal" data-target="#eventDetailModal" (click)="onClickEventInfo(event._id)"></fa-icon>
         </li>
       </ul>
+      <p *ngIf="!todayEvents || todayEvents.length < 1">You are no signed in for today's events</p>
     </div>
   </div>
   <div class="other-signed-in-events" *ngIf="allEventsInCalendarVisible">
@@ -25,10 +26,11 @@
         <fa-icon class="fa-lg event-detail-icon" icon="info-circle" data-toggle="modal" data-target="#eventDetailModal" (click)="onClickEventInfo(event._id)"></fa-icon>
       </li>
     </ul>
+    <p *ngIf="!eventsInCalendar || eventsInCalendar.length < 1">You are not signed in for more events</p>
   </div>
   <div class="calendar-toggle-arrow">
-    <fa-icon (click)="showHideOtherEvents()" class="fa-lg" icon="angle-down" *ngIf="!allEventsInCalendarVisible"></fa-icon>
-    <fa-icon (click)="showHideOtherEvents()" class="fa-lg" icon="angle-up" *ngIf="allEventsInCalendarVisible"></fa-icon>
+    <fa-icon (click)="showHideOtherEvents()" class="fa-lg calendar-toggle-icon" icon="angle-down" *ngIf="!allEventsInCalendarVisible"></fa-icon>
+    <fa-icon (click)="showHideOtherEvents()" class="fa-lg calendar-toggle-icon" icon="angle-up" *ngIf="allEventsInCalendarVisible"></fa-icon>
   </div>
 </div>
 

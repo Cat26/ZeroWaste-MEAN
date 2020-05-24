@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventsService } from "../../../services/events/events.service";
 import * as moment from "moment";
+import { EmitEventService } from "../../../services/emitter/emit-event.service";
 
 @Component({
   selector: 'app-user-calendar',
@@ -26,10 +27,16 @@ export class UserCalendarComponent implements OnInit {
 
   constructor(
     private eventService: EventsService,
+    private emitEventService: EmitEventService
   ) { }
 
   ngOnInit(): void {
     this.getEventsToCalendar();
+    this.emitEventService.updateEventListener().subscribe(msg => {
+      if(this.clickedEvent) {
+        this.onClickEventInfo(this.clickedEvent._id);
+      }
+    })
   }
 
   compareDates(dateOne, dateTwo) {
@@ -58,7 +65,9 @@ export class UserCalendarComponent implements OnInit {
     this.eventService.getUserCalendarEvents().subscribe( (events: any) => {
       this.todayEvents = events.eventsCalendar.filter(event => this.compareDates(event.eventDate, this.today));
       this.eventsInCalendar = events.eventsCalendar.filter(event => !this.compareDates(event.eventDate, this.today));
-      this.clickedEvent = events.eventsCalendar[0] ? events.eventsCalendar[0] : undefined;
+      if(events.eventsCalendar[0]) {
+        this.onClickEventInfo(events.eventsCalendar[0]._id);
+      }
 
     }, error => {
         console.log(error);

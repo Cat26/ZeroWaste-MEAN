@@ -1,1 +1,24 @@
-<app-home-item *ngFor="let event of events" [eventItem]="event"></app-home-item>
+<div class="carousel-inner">
+  <div class="carousel-item active">
+    <svg class="bd-placeholder-img" width="100%" height="400px" xmlns="http://www.w3.org/2000/svg"
+         preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
+      <rect width="100%" height="100%" fill="#777"/>
+    </svg>
+    <div class="container">
+      <div class="carousel-caption text-left">
+        <h1 id="slide-1-title">Welcome in our page.</h1>
+        <p id="slide-1-paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam malesuada nec neque sit amet semper. Nullam
+          vel scelerisque arcu. Aenean dignissim nisi sed orci aliquet condimentum. Proin mollis lectus orci, sodales
+          consequat metus sollicitudin ut. Aliquam at quam sit amet mi imperdiet aliquam. Etiam placerat justo
+          lobortis sollicitudin pulvinar. Morbi at mattis nisi, quis tincidunt dolor. Aliquam aliquet, dolor non
+          ultricies venenatis, eros dolor posuere erat, eu congue neque dolor quis nulla. Nunc quis venenatis mi.
+          Phasellus quis diam eros. Sed massa lorem, fringilla a elit non, maximus sodales arcu. In a dui interdum,
+          pulvinar erat vitae, malesuada sapien. Nulla lacus nisl, faucibus non efficitur sed, tincidunt vel ex.
+          Pellentesque erat nisi, vestibulum id leo a, dapibus laoreet nisi. Sed gravida condimentum justo id
+          imperdiet. Duis eu aliquam dolor.</p>
+        <p><a class="btn btn-lg btn-primary" href="#" role="button">Register</a></p>
+      </div>
+    </div>
+  </div>
+  <app-home-item *ngFor="let event of events" [eventItem]="event" class="carousel-item"></app-home-item>
+</div>
