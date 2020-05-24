@@ -87,6 +87,10 @@ module.exports.getEventFilePathByEventId = function (idEvent, callback) {
     Event.findById(idEvent, 'eventImage', callback);
 };
 
+module.exports.getEventById = function (idEvent, callback) {
+    Event.findById(idEvent, callback);
+};
+
 module.exports.getThreeNewestEvent = function (callback) {
     Event.find(callback).select('-owner.password').limit(3).sort({eventDate: 'desc'})
 };
@@ -109,4 +113,8 @@ module.exports.filterByEventName = function (filter, callback) {
 
 module.exports.filterByEventDescription = function (filter, callback) {
     Event.find( { 'description' : { "$regex": filter, "$options": "i"} }, callback)
+};
+
+module.exports.getEventsToUserCalendar = function (userId, callback) {
+    Event.find({ 'participants': userId }, callback).select('eventDate _id name')
 };

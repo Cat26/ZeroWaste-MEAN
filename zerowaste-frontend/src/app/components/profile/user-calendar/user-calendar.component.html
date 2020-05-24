@@ -1,0 +1,37 @@
+<div class="user-calendar">
+  <h4>Welcome Back</h4>
+  <span class="calendar-title">Calendar Plan</span>
+  <hr>
+  <div class="calendar-today">
+    <div class="today-date">
+      <p class="calendar-item-title">Today</p>
+      <p>{{today}}</p>
+    </div>
+    <div class="today-events">
+      <ul *ngFor="let event of todayEvents">
+        <li>
+          <p class="calendar-item-title">{{getHourAndMinutes(event.eventDate)}}</p>
+          <p class="calendar-event-name">{{event.name}}</p>
+          <fa-icon class="fa-lg event-detail-icon" icon="info-circle" data-toggle="modal" data-target="#eventDetailModal" (click)="onClickEventInfo(event._id)"></fa-icon>
+        </li>
+      </ul>
+      <p *ngIf="!todayEvents || todayEvents.length < 1">You are no signed in for today's events</p>
+    </div>
+  </div>
+  <div class="other-signed-in-events" *ngIf="allEventsInCalendarVisible">
+    <ul *ngFor="let event of eventsInCalendar">
+      <li>
+        <p class="calendar-item-title">{{formatDate(event.eventDate)}}</p>
+        <p class="calendar-event-name">{{event.name}}</p>
+        <fa-icon class="fa-lg event-detail-icon" icon="info-circle" data-toggle="modal" data-target="#eventDetailModal" (click)="onClickEventInfo(event._id)"></fa-icon>
+      </li>
+    </ul>
+    <p *ngIf="!eventsInCalendar || eventsInCalendar.length < 1">You are not signed in for more events</p>
+  </div>
+  <div class="calendar-toggle-arrow">
+    <fa-icon (click)="showHideOtherEvents()" class="fa-lg calendar-toggle-icon" icon="angle-down" *ngIf="!allEventsInCalendarVisible"></fa-icon>
+    <fa-icon (click)="showHideOtherEvents()" class="fa-lg calendar-toggle-icon" icon="angle-up" *ngIf="allEventsInCalendarVisible"></fa-icon>
+  </div>
+</div>
+
+<app-calendar-item-modal *ngIf="clickedEvent" [eventItem]="clickedEvent" class="modal" id="eventDetailModal"></app-calendar-item-modal>

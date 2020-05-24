@@ -2,7 +2,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faThumbsDown, faThumbsUp, faUserFriends, faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
+import {
+  faThumbsDown,
+  faThumbsUp,
+  faUserFriends,
+  faArrowDown,
+  faArrowUp,
+  faAngleDown,
+  faAngleUp,
+  faInfoCircle
+} from '@fortawesome/free-solid-svg-icons';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -29,6 +38,11 @@ import { UserEventItemComponent } from './components/profile/user-events/user-ev
 import { HomeListComponent } from './components/home/home-list/home-list.component';
 import { HomeItemComponent } from './components/home/home-list/home-item/home-item.component';
 import { EventsManagerComponent } from './components/events/events-manager/events-manager.component';
+import { UserCalendarComponent } from './components/profile/user-calendar/user-calendar.component';
+import { MatDialogModule } from "@angular/material/dialog";
+import { CalendarItemModalComponent } from './components/profile/user-calendar/calendar-item-modal/calendar-item-modal.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from "@angular/material/button";
 
 @NgModule({
   declarations: [
@@ -47,7 +61,9 @@ import { EventsManagerComponent } from './components/events/events-manager/event
     UserEventItemComponent,
     HomeListComponent,
     HomeItemComponent,
-    EventsManagerComponent
+    EventsManagerComponent,
+    UserCalendarComponent,
+    CalendarItemModalComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +72,10 @@ import { EventsManagerComponent } from './components/events/events-manager/event
     FormsModule,
     FlashMessagesModule.forRoot(),
     ReactiveFormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatDialogModule,
+    BrowserAnimationsModule,
+    MatButtonModule
   ],
   providers: [
     ValidateService,
@@ -68,6 +87,6 @@ import { EventsManagerComponent } from './components/events/events-manager/event
 })
 export class AppModule {
   constructor(library: FaIconLibrary) {
-    library.addIcons(faThumbsDown, faThumbsUp, faUserFriends, faArrowDown, faArrowUp);
+    library.addIcons(faThumbsDown, faThumbsUp, faUserFriends, faArrowDown, faArrowUp, faAngleDown, faAngleUp, faInfoCircle);
   }
 }

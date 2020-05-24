@@ -1,0 +1,17 @@
+@media (max-width: 768px) {
+  #slide-1-title {
+    font-size: 18px;
+  }
+  #slide-1-paragraph {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 576px) {
+  #slide-1-title {
+    font-size: 13px;
+  }
+  #slide-1-paragraph {
+    font-size: 9px;
+  }
+}
