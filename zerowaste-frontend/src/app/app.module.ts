@@ -78,7 +78,7 @@ import { AddressItemComponent } from './components/address/address-item/address-
     HomeItemComponent,
     EventsManagerComponent,
     UserCalendarComponent,
-    CalendarItemModalComponent
+    CalendarItemModalComponent,
     EventsManagerComponent,
     ShopsListComponent,
     ShopsItemComponent,
