@@ -142,6 +142,25 @@ router.post('/newAddress', (req, res, next) => {
     });
 });
 
+router.get('/address/:_id/info', (req, res) => {
+    Address.getAddressById(req.params._id, (err, address) => {
+        if(err){
+            res.json({
+                success: false,
+                msg: 'Failed to get this address',
+                error: err
+            })
+        } else if(!address) {
+            res.status(400).send('Address not found')
+        } else {
+            res.json({
+                success: true,
+                address: address
+            })
+        }
+    })
+})
+
 // Shops
 router.post('/newShop', (req, res) => {
     let newShop = new Shop({
@@ -152,6 +171,7 @@ router.post('/newShop', (req, res) => {
         rating: req.body.rating,
         createdAt: req.body.createdAt,
         updatedAt: req.body.updatedAt,
+        description: req.body.description,
         idUser: req.user,
         enabled: req.body.enabled
     });
@@ -170,5 +190,22 @@ router.post('/newShop', (req, res) => {
         }
     })
 });
+
+router.get('/shops', (req, res) => {
+    Shop.getAllShops((err, shops) =>{
+        if (err) {
+            res.json({
+                success: false,
+                msh: 'No shop to get',
+                error: err
+            })
+        } else {
+            res.json({
+                success: true,
+                shops: shops
+            })
+        }
+    })
+})
 
 module.exports = router;

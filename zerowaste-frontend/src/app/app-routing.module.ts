@@ -7,6 +7,7 @@ import {EventsComponent} from "./components/events/events.component";
 import {ProfileComponent} from "./components/profile/profile.component";
 import { AuthGuard } from "./guards/auth.guard";
 import {ShopsComponent} from "./components/shops/shops.component";
+import {AddressComponent} from "./components/address/address.component";
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path:'login', component: LoginComponent},
   {path:'events', component: EventsComponent},
   {path:'shops', component: ShopsComponent},
+  {path:'address', component: AddressComponent},
   {path:'profile', component: ProfileComponent, canActivate: [AuthGuard]},
 ];
 

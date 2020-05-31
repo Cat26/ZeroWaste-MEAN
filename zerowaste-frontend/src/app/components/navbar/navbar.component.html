@@ -13,17 +13,14 @@
         <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
           <a [routerLink]="['/events']" class="nav-link">Events</a>
         </li>
-        <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
-          <a [routerLink]="['/shops']" class="nav-link">Shops</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+        <li class="nav-item dropdown" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
+          <a class="nav-link dropdown-toggle" [routerLink]="['/shops']" id="navbarDropdownMenuLink" role="button"
              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Categories
+            Shops
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="#">Shops</a>
-            <a class="dropdown-item" href="#">Personal Goals</a>
+            <a class="dropdown-item" [routerLink]="['/shops']">All Shops</a>
+            <a class="dropdown-item" href="#">Add Shop</a>
           </div>
         </li>
       </ul>

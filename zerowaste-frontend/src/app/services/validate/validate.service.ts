@@ -33,8 +33,10 @@ export class ValidateService {
   }
 
   validateShop(shopForm, update) {
-    if (shopForm.get('name').value && shopForm.get('description').value) {
-        return true;
+    if (shopForm.get('name').value && shopForm.get('email').value) {
+        if (update) {
+          return true;
+        }
       }
     return false;
   }
