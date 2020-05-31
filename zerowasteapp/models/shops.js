@@ -36,6 +36,11 @@ const ShopSchema = mongoose.Schema({
         required: true
     },
     idUser: UserSchema,
+    description: {
+        type: String,
+        required: false,
+        maxlength: 500
+    },
     enabled: {
         type: Boolean,
         required: true
@@ -45,11 +50,15 @@ const ShopSchema = mongoose.Schema({
 
 const Shop = module.exports = mongoose.model('Shop', ShopSchema);
 
+module.exports.getAllShops = function (callback) {
+    Shop.find(callback).sort('desc')
+}
+
 module.exports.addShop = function (newShop, callback) {
     newShop.save(callback);
 };
 
-module.exports.udateShopInfo = function (idShop, updateShopInfo, callback) {
+module.exports.updateShopInfo = function (idShop, updateShopInfo, callback) {
     Shop.findByIdAndUpdate(idShop, updateShopInfo, callback);
 }
 

@@ -49,6 +49,10 @@ import {UserShopsListComponent} from "./components/profile/user-shops/user-shops
 import {UserShopsItemComponent} from "./components/profile/user-shops/user-shops-list/user-shops-item/user-shops-item.component";
 import {UserShopFormComponent} from "./components/profile/user-shops/user-shop-form/user-shop-form.component";
 import {ShopsService} from "./services/shops/shops.service";
+import { ShopsListComponent } from './components/shops/shops-list/shops-list.component';
+import { ShopsItemComponent } from './components/shops/shops-list/shops-item/shops-item.component';
+import { AddressComponent } from './components/address/address.component';
+import { AddressItemComponent } from './components/address/address-item/address-item.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +78,11 @@ import {ShopsService} from "./services/shops/shops.service";
     EventsManagerComponent,
     UserCalendarComponent,
     CalendarItemModalComponent
+    EventsManagerComponent,
+    ShopsListComponent,
+    ShopsItemComponent,
+    AddressComponent,
+    AddressItemComponent
   ],
   imports: [
     BrowserModule,
