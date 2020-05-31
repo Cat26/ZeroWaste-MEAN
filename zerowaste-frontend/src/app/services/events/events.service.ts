@@ -107,4 +107,23 @@ export class EventsService {
     };
     return this.http.get('http://localhost:3000/categories/events/filter/eventDescription/' + filterQuery, httpOptions);
   }
+
+  getUserCalendarEvents() {
+    this.authService.loadToken();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': this.authService.authToken
+      })
+    };
+    return this.http.get('http://localhost:3000/users/calendar', httpOptions);
+  }
+
+  getEventsDetails(eventId) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.get('http://localhost:3000/categories/events/' + eventId + '/details', httpOptions);
+  }
 }

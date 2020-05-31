@@ -1,4 +1,4 @@
-@media (min-width: 768px) {
+@media (min-width: 1440px) {
   .menage-events-btn {
     display: none;
   }
@@ -12,4 +12,5 @@
   top: 10px;
   z-index: 1020;
   right: 100px;
+  right: auto;
 }
