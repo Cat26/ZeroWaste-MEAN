@@ -7,7 +7,13 @@ const mongoose = require('mongoose');
 const config = require('./config/database');
 
 // Connect to Database
-mongoose.connect(config.database, { useNewUrlParser: true , useUnifiedTopology: true, useFindAndModify: false });
+mongoose.connect(
+    config.database,
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false
+    });
 
 // On Connection
 mongoose.connection.on('connected', () => {

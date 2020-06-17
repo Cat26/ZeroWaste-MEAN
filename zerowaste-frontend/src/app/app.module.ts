@@ -24,6 +24,7 @@ import { ShopsComponent } from "./components/shops/shops.component";
 import { ProfileComponent } from './components/profile/profile.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
+import { GoogleMapsModule } from '@angular/google-maps';
 
 import { ValidateService } from "./services/validate/validate.service";
 import { AuthService } from "./services/auth/auth.service";
@@ -53,6 +54,7 @@ import { ShopsListComponent } from './components/shops/shops-list/shops-list.com
 import { ShopsItemComponent } from './components/shops/shops-list/shops-item/shops-item.component';
 import { AddressComponent } from './components/address/address.component';
 import { AddressItemComponent } from './components/address/address-item/address-item.component';
+
 
 @NgModule({
   declarations: [
@@ -94,7 +96,8 @@ import { AddressItemComponent } from './components/address/address-item/address-
     FontAwesomeModule,
     MatDialogModule,
     BrowserAnimationsModule,
-    MatButtonModule
+    MatButtonModule,
+    GoogleMapsModule
   ],
   providers: [
     ValidateService,
