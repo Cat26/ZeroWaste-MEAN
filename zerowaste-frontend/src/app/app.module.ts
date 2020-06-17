@@ -55,7 +55,6 @@ import { ShopsItemComponent } from './components/shops/shops-list/shops-item/sho
 import { AddressComponent } from './components/address/address.component';
 import { AddressItemComponent } from './components/address/address-item/address-item.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,6 +75,7 @@ import { AddressItemComponent } from './components/address/address-item/address-
     UserShopsListComponent,
     UserShopsItemComponent,
     UserShopFormComponent,
+    HomeListComponent,
     HomeItemComponent,
     EventsManagerComponent,
     UserCalendarComponent,

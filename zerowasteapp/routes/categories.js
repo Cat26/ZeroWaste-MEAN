@@ -46,7 +46,7 @@ router.post('/events', upload.single('eventImage'), passport.authenticate('jwt',
                 msg: 'Event created'
             })
         }
-    });
+    })
 });
 
 router.put('/events/:_id/update', upload.single('eventImage'), passport.authenticate('jwt', {session: false}), (req, res, next) => {
@@ -190,8 +190,9 @@ router.get('/events/filter/eventDescription/:filter', (req, res, next) => {
                 events: events
             })
         }
-    });
+    })
 });
+
 
 // Address
 router.post('/newAddress', (req, res, next) => {
