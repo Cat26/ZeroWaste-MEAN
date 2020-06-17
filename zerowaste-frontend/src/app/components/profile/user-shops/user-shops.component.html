@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-md-6">
+    <button
+      class="btn btn-primary create-shop-btn"
+      type="button"
+      data-toggle="collapse"
+      data-target="#shop-form"
+      aria-expanded="false"
+      aria-controls="shop-form">
+      Create Shop
+    </button>
+    <app-user-shop-form class="collapse" id="shop-form"></app-user-shop-form>
+  </div>
+  <div class="col-md-6">
+    <app-user-shops-list [userShops]="userShops"></app-user-shops-list>
+  </div>
+</div>

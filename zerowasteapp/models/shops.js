@@ -29,11 +29,13 @@ const ShopSchema = mongoose.Schema({
     },
     createdAt: {
         type: Date,
-        required: true
+        default: Date.now(),
+        required: false
     },
     updatedAt: {
         type: Date,
-        required: true
+        default: Date.now(),
+        required: false
     },
     idUser: UserSchema,
     description: {
@@ -43,7 +45,7 @@ const ShopSchema = mongoose.Schema({
     },
     enabled: {
         type: Boolean,
-        required: true
+        required: false
     }
     //TODO: Add shop logo
 });
