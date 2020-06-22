@@ -33,10 +33,12 @@ export class ValidateService {
   }
 
   validateShop(shopForm, update) {
-    if (shopForm.get('name').value && shopForm.get('email').value && shopForm.get('phoneNumber').value) {
-        if (update) {
-          return true;
-        }
+    console.log(shopForm.get('name').value);
+    console.log(shopForm.get('email').value);
+    console.log(shopForm.get('phoneNumber').value);
+    console.log((shopForm.get('name').value && shopForm.get('email').value && shopForm.get('phoneNumber').value) && (!update));
+    if ((shopForm.get('name').value && shopForm.get('email').value && shopForm.get('phoneNumber').value) && (!update)) {
+      return true;
       }
     return false;
   }

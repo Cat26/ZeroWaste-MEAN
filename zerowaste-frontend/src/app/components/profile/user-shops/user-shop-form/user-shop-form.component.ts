@@ -3,7 +3,7 @@ import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {ShopsService} from '../../../../services/shops/shops.service';
 import {FlashMessagesService} from 'angular2-flash-messages';
 import {ValidateService} from '../../../../services/validate/validate.service';
-import {EmitEventService} from '../../../../services/emitter/emit-event.service';
+import {EmitShopService} from '../../../../services/emitter/emit-shop.service';
 
 @Component({
   selector: 'app-user-shop-form',
@@ -26,11 +26,11 @@ export class UserShopFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private flashMessage: FlashMessagesService,
     private validateService: ValidateService,
-    private emitEventService: EmitEventService
+    private emitShopService: EmitShopService
   ) { }
 
   ngOnInit(): void {
-    this.emitEventService.updateEventListener().subscribe(
+    this.emitShopService.updateShopListener().subscribe(
       (shopData: any) => {
         if (this.isInitCall) {
           this.isInitCall = false;
@@ -56,7 +56,8 @@ export class UserShopFormComponent implements OnInit {
     this.isNewShop = true;
     this.shopUpdateId = undefined;
   }
-  submitEventCall() {
+
+  submitShopCall() {
     if (!this.validateService.validateShop(this.shopForm, !this.isNewShop)) {
       this.flashMessage.show(
         'Please fill in all fields',
@@ -73,7 +74,7 @@ export class UserShopFormComponent implements OnInit {
       this.shopsService.createShop(formData).subscribe(
         (res: any) => {
           if (res.success) {
-            this.emitEventService.emitDeleteCreateEvent('shop created');
+            this.emitShopService.emitDeleteCreateShop('shop created');
             this.flashMessage.show(
               res.msg,
               {cssClass: 'alert-success', timeout: 3000}
@@ -92,7 +93,7 @@ export class UserShopFormComponent implements OnInit {
       this.shopsService.updateShop(this.shopUpdateId, formData).subscribe(
         (res: any) => {
           if (res.success) {
-            this.emitEventService.emitDeleteCreateEvent('shop updated');
+            this.emitShopService.emitDeleteCreateShop('shop updated');
             this.flashMessage.show(
               res.msg,
               {cssClass: 'alert-success', timeout: 3000}

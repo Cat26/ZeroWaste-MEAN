@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from "rxjs";
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class EmitEventService {
   }
 
   emitDeleteCreateEvent(msg: string) {
-    this.createDeleteActionEvent.next(msg)
+    this.createDeleteActionEvent.next(msg);
   }
 
   deleteCreateEventListener() {
@@ -29,7 +29,7 @@ export class EmitEventService {
   }
 
   emitManageEvents(manageQuery) {
-    this.manageActionEvent.next(manageQuery)
+    this.manageActionEvent.next(manageQuery);
   }
 
   manageEventsListener() {

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { EventsService } from "../../../../services/events/events.service";
-import { FormBuilder, FormGroup, FormControl } from "@angular/forms";
-import { FlashMessagesService } from "angular2-flash-messages";
-import { ValidateService } from "../../../../services/validate/validate.service";
-import { EmitEventService } from "../../../../services/emitter/emit-event.service";
+import { EventsService } from '../../../../services/events/events.service';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FlashMessagesService } from 'angular2-flash-messages';
+import { ValidateService } from '../../../../services/validate/validate.service';
+import { EmitEventService } from '../../../../services/emitter/emit-event.service';
 import * as moment from 'moment';
 
 @Component({
@@ -41,10 +41,10 @@ export class UserEventFormComponent implements OnInit {
         if (this.isInitCall) {
           this.isInitCall = false;
         } else {
-          this.loadDataToUpdate(eventData)
+          this.loadDataToUpdate(eventData);
         }
       }
-    )
+    );
   }
 
   onFileSelect(event) {
@@ -106,10 +106,10 @@ export class UserEventFormComponent implements OnInit {
               res.msg,
               {cssClass: 'alert-danger', timeout: 5000}
             );
-            console.log(res.error)
+            console.log(res.error);
           }
         }
-      )
+      );
     } else {
       this.eventService.updateEvent(this.eventUpdateId, formData).subscribe(
         (res: any) => {
@@ -125,10 +125,10 @@ export class UserEventFormComponent implements OnInit {
               res.msg,
               {cssClass: 'alert-danger', timeout: 5000}
             );
-            console.log(res.error)
+            console.log(res.error);
           }
         }
-      )
+      );
     }
 
   }

@@ -15,11 +15,11 @@ const ShopSchema = mongoose.Schema({
     },
     email: {
         type: String,
-        required: true
+        required: false
     },
     phoneNumber: {
         type: String,
-        required: true,
+        required: false,
         minlength: 7,
         maxlength: 12
     },
