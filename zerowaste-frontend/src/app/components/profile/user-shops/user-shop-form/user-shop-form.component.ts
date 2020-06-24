@@ -12,9 +12,7 @@ import {EmitShopService} from '../../../../services/emitter/emit-shop.service';
 })
 export class UserShopFormComponent implements OnInit {
   shopForm = new FormGroup({
-    name: new FormControl(''),
-    email: new FormControl(''),
-    phoneNumber: new FormControl('')
+    name: new FormControl('')
   });
 
   isInitCall = true;
@@ -45,9 +43,7 @@ export class UserShopFormComponent implements OnInit {
     this.isNewShop = false;
     this.shopUpdateId = updateShopData._id;
     this.shopForm.patchValue({
-      name: updateShopData.name,
-      email: updateShopData.email,
-      phoneNumber: updateShopData.phoneNumber
+      name: updateShopData.name
     });
   }
 
@@ -58,18 +54,15 @@ export class UserShopFormComponent implements OnInit {
   }
 
   submitShopCall() {
-    if (!this.validateService.validateShop(this.shopForm, !this.isNewShop)) {
-      this.flashMessage.show(
-        'Please fill in all fields',
-        {cssClass: 'alert-danger', timeout: 3000}
-      );
-      return false;
-    }
-
+  //   if (!this.validateService.validateShop(this.shopForm, !this.isNewShop)) {
+  //     this.flashMessage.show(
+  //       'Please fill in all fields',
+  //       {cssClass: 'alert-danger', timeout: 3000}
+  //     );
+  //     return false;
+  //   }
     const formData = new FormData();
     formData.append('name', this.shopForm.get('name').value);
-    formData.append('email', this.shopForm.get('email').value);
-    formData.append('phoneNumber', this.shopForm.get('phoneNumber').value);
     if (this.isNewShop) {
       this.shopsService.createShop(formData).subscribe(
         (res: any) => {

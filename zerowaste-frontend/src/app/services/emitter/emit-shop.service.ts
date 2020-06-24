@@ -18,4 +18,8 @@ export class EmitShopService {
   updateShopListener() {
     return this.updateActionShop.asObservable();
   }
+
+  emitUpdateShop(shopData) {
+    this.updateActionShop.next(shopData);
+  }
 }

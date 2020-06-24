@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ShopsService} from '../../../../../services/shops/shops.service';
 import {FlashMessagesService} from 'angular2-flash-messages';
 import {EmitEventService} from '../../../../../services/emitter/emit-event.service';
+import {EmitShopService} from "../../../../../services/emitter/emit-shop.service";
 
 @Component({
   selector: 'app-user-shops-item',
@@ -19,7 +20,7 @@ export class UserShopsItemComponent implements OnInit {
   constructor(
     private shopsService: ShopsService,
     private flashMessage: FlashMessagesService,
-    private emitEventService: EmitEventService
+    private emitShopService: EmitShopService
   ) { }
 
   ngOnInit(): void {
@@ -28,8 +29,9 @@ export class UserShopsItemComponent implements OnInit {
   deleteShop() {
     this.shopsService.deleteShop(this.userShopItem._id).subscribe((res: any) => {
       if (res.success) {
-        this.emitEventService.emitDeleteCreateEvent('Shop deleted');
-        this.flashMessage.show(res.msg, {
+        this.emitShopService.emitDeleteCreateShop('Shop deleted');
+        this.flashMessage.show(
+          res.msg, {
           cssClass: 'alert-success',
           thimeout: 3000
         });
@@ -44,6 +46,6 @@ export class UserShopsItemComponent implements OnInit {
   }
 
   updateShop(shopItem) {
-    this.emitEventService.emitUpdateEvent(shopItem);
+    this.emitShopService.emitUpdateShop(shopItem);
   }
 }

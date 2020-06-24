@@ -47,7 +47,7 @@ export class UserEventItemComponent implements OnInit {
             res.msg,
             {cssClass: 'alert-danger', timeout: 5000}
           );
-          console.log(res.error)
+          console.log(res.error);
         }
       }
     )
