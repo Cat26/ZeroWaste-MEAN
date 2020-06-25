@@ -12,7 +12,11 @@ import {EmitShopService} from '../../../../services/emitter/emit-shop.service';
 })
 export class UserShopFormComponent implements OnInit {
   shopForm = new FormGroup({
-    name: new FormControl('')
+    name: new FormControl(''),
+    email: new FormControl(''),
+    phoneNumber: new FormControl(''),
+    enabled: new FormControl(true),
+    description: new FormControl('')
   });
 
   isInitCall = true;
@@ -54,14 +58,6 @@ export class UserShopFormComponent implements OnInit {
   }
 
   submitShopCall() {
-  //   if (!this.validateService.validateShop(this.shopForm, !this.isNewShop)) {
-  //     this.flashMessage.show(
-  //       'Please fill in all fields',
-  //       {cssClass: 'alert-danger', timeout: 3000}
-  //     );
-  //     return false;
-  //   }
-
     let formObj = this.shopForm.getRawValue();
     let serializedForm = JSON.stringify(formObj);
 

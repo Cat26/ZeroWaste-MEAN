@@ -1,8 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ShopsService} from '../../../../../services/shops/shops.service';
 import {FlashMessagesService} from 'angular2-flash-messages';
-import {EmitEventService} from '../../../../../services/emitter/emit-event.service';
-import {EmitShopService} from "../../../../../services/emitter/emit-shop.service";
+import {EmitShopService} from '../../../../../services/emitter/emit-shop.service';
 
 @Component({
   selector: 'app-user-shops-item',
@@ -14,6 +13,7 @@ export class UserShopsItemComponent implements OnInit {
     name: string,
     email: string,
     phoneNumber: string,
+    description: string,
     _id: string
   };
 
