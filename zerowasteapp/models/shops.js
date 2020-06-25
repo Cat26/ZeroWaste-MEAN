@@ -54,7 +54,7 @@ const Shop = module.exports = mongoose.model('Shop', ShopSchema);
 
 module.exports.getAllShops = function (callback) {
     Shop.find(callback).sort('desc')
-}
+};
 
 module.exports.addShop = function (newShop, callback) {
     newShop.save(callback);
@@ -62,8 +62,8 @@ module.exports.addShop = function (newShop, callback) {
 
 module.exports.updateShopInfo = function (idShop, updateShopInfo, callback) {
     Shop.findByIdAndUpdate(idShop, updateShopInfo, callback);
-}
+};
 
 module.exports.deleteShop = function (idShop, callback) {
     Shop.findByIdAndDelete(idShop, callback)
-}
+};

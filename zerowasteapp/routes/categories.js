@@ -28,6 +28,7 @@ const upload = multer({storage: storage, fileFilter: fileFilter});
 
 // Events
 router.post('/events', upload.single('eventImage'), passport.authenticate('jwt', {session: false}), (req, res, next) => {
+    console.log(req.body)
     let newEvent = new Event({
         name: req.body.name,
         description: req.body.description,
@@ -233,7 +234,8 @@ router.get('/address/:_id/info', (req, res) => {
 })
 
 // Shops
-router.post('/newShop', (req, res) => {
+router.post('/newShop', (req, res, next) => {
+    console.log(req.body)
     let newShop = new Shop({
         name: req.body.name,
         shopAddress: req.body.shopAddress,
@@ -252,7 +254,7 @@ router.post('/newShop', (req, res) => {
             res.json({
                 success: false,
                 msg: 'Failed to add new shop.'
-            })
+            });
         } else {
             res.json({
                 success: true,

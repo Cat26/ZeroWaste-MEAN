@@ -61,10 +61,12 @@ export class UserShopFormComponent implements OnInit {
   //     );
   //     return false;
   //   }
-    const formData = new FormData();
-    formData.append('name', this.shopForm.get('name').value);
+
+    let formObj = this.shopForm.getRawValue();
+    let serializedForm = JSON.stringify(formObj);
+
     if (this.isNewShop) {
-      this.shopsService.createShop(formData).subscribe(
+      this.shopsService.createShop(serializedForm).subscribe(
         (res: any) => {
           if (res.success) {
             this.emitShopService.emitDeleteCreateShop('shop created');
@@ -83,7 +85,7 @@ export class UserShopFormComponent implements OnInit {
         }
       );
     } else {
-      this.shopsService.updateShop(this.shopUpdateId, formData).subscribe(
+      this.shopsService.updateShop(this.shopUpdateId, serializedForm).subscribe(
         (res: any) => {
           if (res.success) {
             this.emitShopService.emitDeleteCreateShop('shop updated');
