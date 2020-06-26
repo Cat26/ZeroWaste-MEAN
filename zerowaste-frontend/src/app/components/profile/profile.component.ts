@@ -51,7 +51,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.emitEventService.deleteCreateEventListener().subscribe(msg =>{
       this.getProfileData();
-    })
+    });
   }
 
   onOptionChange(option) {
@@ -62,6 +62,7 @@ export class ProfileComponent implements OnInit {
     this.authService.getProfile().subscribe((profile: any) => {
         this.user = profile.user;
         this.userEvents = profile.events;
+        this.userShops = profile.shops;
       },
       error => {
         console.log(error);

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { AuthService} from '../auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 export class ShopsService {
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private authService: AuthService
   ) {
   }
 
@@ -30,27 +32,30 @@ export class ShopsService {
   }
 
   createShop(shopData) {
+    this.authService.loadToken();
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json'
+        'Authorization': this.authService.authToken
       })
     };
     return this.http.post('http://localhost:3000/categories/newShop', shopData, httpOptions);
   }
 
   deleteShop(shopId) {
+    this.authService.loadToken();
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json'
+        'Authorization': this.authService.authToken
       })
     };
     return this.http.delete('http://localhost:3000/categories/shops/' + shopId + '/delete', httpOptions);
   }
 
   updateShop(shopId, shopData) {
+    this.authService.loadToken();
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json'
+        'Authorization': this.authService.authToken
       })
     };
     return this.http.put('http://localhost:3000/categories/shops/' + shopId + '/update', shopData, httpOptions);

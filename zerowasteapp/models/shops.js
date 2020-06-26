@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const UserSchema = mongoose.model('User').schema;
-// const AddressSchema = require('../models/address').AddressSchema;
 
 const ShopSchema = mongoose.Schema({
     name: {
@@ -34,10 +33,9 @@ const ShopSchema = mongoose.Schema({
     },
     updatedAt: {
         type: Date,
-        default: Date.now(),
         required: false
     },
-    idUser: UserSchema,
+    owner: UserSchema,
     description: {
         type: String,
         required: false,
@@ -53,7 +51,11 @@ const ShopSchema = mongoose.Schema({
 const Shop = module.exports = mongoose.model('Shop', ShopSchema);
 
 module.exports.getAllShops = function (callback) {
-    Shop.find(callback).sort('desc')
+    Shop.find(callback).select('-owner.password').sort('desc')
+};
+
+module.exports.getUserShops = function (userId, callback) {
+    Shop.find({ 'owner._id': userId }, callback).select('-owner.password');
 };
 
 module.exports.addShop = function (newShop, callback) {

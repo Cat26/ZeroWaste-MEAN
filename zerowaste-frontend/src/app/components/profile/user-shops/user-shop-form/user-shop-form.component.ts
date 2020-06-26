@@ -4,6 +4,7 @@ import {ShopsService} from '../../../../services/shops/shops.service';
 import {FlashMessagesService} from 'angular2-flash-messages';
 import {ValidateService} from '../../../../services/validate/validate.service';
 import {EmitShopService} from '../../../../services/emitter/emit-shop.service';
+import {now} from 'moment';
 
 @Component({
   selector: 'app-user-shop-form',
@@ -12,11 +13,12 @@ import {EmitShopService} from '../../../../services/emitter/emit-shop.service';
 })
 export class UserShopFormComponent implements OnInit {
   shopForm = new FormGroup({
-    name: new FormControl(''),
-    email: new FormControl(''),
-    phoneNumber: new FormControl(''),
+    name: new FormControl('test'),
+    email: new FormControl('test@test.pl'),
+    phoneNumber: new FormControl('555665656'),
     enabled: new FormControl(true),
-    description: new FormControl('')
+    description: new FormControl('Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
+    updatedAt: new FormControl('')
   });
 
   isInitCall = true;
@@ -58,8 +60,9 @@ export class UserShopFormComponent implements OnInit {
   }
 
   submitShopCall() {
-    let formObj = this.shopForm.getRawValue();
-    let serializedForm = JSON.stringify(formObj);
+    this.shopForm.patchValue({updatedAt : now()});
+    const formObj = this.shopForm.getRawValue();
+    const serializedForm = JSON.stringify(formObj);
 
     if (this.isNewShop) {
       this.shopsService.createShop(serializedForm).subscribe(
