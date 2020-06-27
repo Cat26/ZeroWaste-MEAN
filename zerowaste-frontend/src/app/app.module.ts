@@ -54,6 +54,7 @@ import { ShopsListComponent } from './components/shops/shops-list/shops-list.com
 import { ShopsItemComponent } from './components/shops/shops-list/shops-item/shops-item.component';
 import { AddressComponent } from './components/address/address.component';
 import { AddressItemComponent } from './components/address/address-item/address-item.component';
+import { UserAddressComponent } from './components/profile/user-address/user-address.component';
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import { AddressItemComponent } from './components/address/address-item/address-
     ShopsListComponent,
     ShopsItemComponent,
     AddressComponent,
-    AddressItemComponent
+    AddressItemComponent,
+    UserAddressComponent
   ],
   imports: [
     BrowserModule,
