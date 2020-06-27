@@ -63,6 +63,7 @@ export class UserShopFormComponent implements OnInit {
     this.shopForm.patchValue({updatedAt : now()});
     const formObj = this.shopForm.getRawValue();
     const serializedForm = JSON.stringify(formObj);
+    console.log(serializedForm);
 
     if (this.isNewShop) {
       this.shopsService.createShop(serializedForm).subscribe(

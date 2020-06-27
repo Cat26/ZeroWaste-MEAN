@@ -245,7 +245,7 @@ router.post('/newShop', passport.authenticate('jwt', {session: false}),(req, res
         createdAt: req.body.createdAt,
         updatedAt: req.body.updatedAt,
         description: req.body.description,
-        idUser: req.user,
+        owner: req.user,
         enabled: req.body.enabled
     });
 
