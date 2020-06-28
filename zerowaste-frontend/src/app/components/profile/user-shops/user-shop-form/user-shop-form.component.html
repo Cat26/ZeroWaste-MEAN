@@ -33,7 +33,6 @@
         required
       />
     </div>
-
     <div class="form-group">
       <label>Shop description</label>
       <textarea
@@ -45,6 +44,56 @@
         required
         ></textarea>
     </div>
+  </form>
+  <form [formGroup]="addressForm">
+    <div id="form-group">
+      <label>Shop Address</label>
+      <input
+        class="form-control"
+        type="text"
+        name="street"
+        formControlName="street"
+        maxlength="85"
+        required
+      />
+      <label>Building Number</label>
+      <input
+        class="form-control"
+        type="number"
+        name="buildingNumber"
+        formControlName="buildingNumber"
+        maxlength="5"
+        required
+      />
+      <label>Apartment Number</label>
+      <input
+        class="form-control"
+        type="number"
+        name="apartmentNumber"
+        formControlName="apartmentNumber"
+        maxlength="5"
+        required
+      />
+      <label>Post Code</label>
+      <input
+        class="form-control"
+        type="text"
+        name="postCode"
+        formControlName="postCode"
+        maxlength="6"
+        required
+      />
+      <label>City Name</label>
+      <input
+        class="form-control"
+        type="text"
+        name="cityName"
+        formControlName="cityName"
+        maxlength="35"
+        required
+      />
+    </div>
+  </form>
     <div class="form-group">
       <button type="submit" class="btn btn-primary" (click)="submitShopCall()">
         Submit
@@ -53,5 +102,4 @@
         Cancel
       </button>
     </div>
-  </form>
 </div>

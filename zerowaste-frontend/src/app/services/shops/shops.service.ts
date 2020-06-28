@@ -39,7 +39,6 @@ export class ShopsService {
         'Authorization': this.authService.authToken
       })
     };
-    console.log(shopData)
     return this.http.post('http://localhost:3000/categories/newShop', shopData, httpOptions);
   }
 

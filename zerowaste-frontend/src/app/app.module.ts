@@ -41,19 +41,20 @@ import { HomeListComponent } from './components/home/home-list/home-list.compone
 import { HomeItemComponent } from './components/home/home-list/home-item/home-item.component';
 import { EventsManagerComponent } from './components/events/events-manager/events-manager.component';
 import { UserCalendarComponent } from './components/profile/user-calendar/user-calendar.component';
-import { MatDialogModule } from "@angular/material/dialog";
+import { MatDialogModule } from '@angular/material/dialog';
 import { CalendarItemModalComponent } from './components/profile/user-calendar/calendar-item-modal/calendar-item-modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule } from "@angular/material/button";
-import {UserShopsComponent} from "./components/profile/user-shops/user-shops.component";
-import {UserShopsListComponent} from "./components/profile/user-shops/user-shops-list/user-shops-list.component";
-import {UserShopsItemComponent} from "./components/profile/user-shops/user-shops-list/user-shops-item/user-shops-item.component";
-import {UserShopFormComponent} from "./components/profile/user-shops/user-shop-form/user-shop-form.component";
-import {ShopsService} from "./services/shops/shops.service";
+import { MatButtonModule } from '@angular/material/button';
+import { UserShopsComponent } from './components/profile/user-shops/user-shops.component';
+import { UserShopsListComponent } from './components/profile/user-shops/user-shops-list/user-shops-list.component';
+import { UserShopsItemComponent } from './components/profile/user-shops/user-shops-list/user-shops-item/user-shops-item.component';
+import { UserShopFormComponent } from './components/profile/user-shops/user-shop-form/user-shop-form.component';
+import { ShopsService } from './services/shops/shops.service';
 import { ShopsListComponent } from './components/shops/shops-list/shops-list.component';
 import { ShopsItemComponent } from './components/shops/shops-list/shops-item/shops-item.component';
 import { AddressComponent } from './components/address/address.component';
 import { AddressItemComponent } from './components/address/address-item/address-item.component';
+import { UserAddressComponent } from './components/profile/user-address/user-address.component';
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import { AddressItemComponent } from './components/address/address-item/address-
     ShopsListComponent,
     ShopsItemComponent,
     AddressComponent,
-    AddressItemComponent
+    AddressItemComponent,
+    UserAddressComponent
   ],
   imports: [
     BrowserModule,
@@ -97,14 +99,15 @@ import { AddressItemComponent } from './components/address/address-item/address-
     MatDialogModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    GoogleMapsModule
+    GoogleMapsModule,
   ],
   providers: [
     ValidateService,
     AuthService,
     EventsService,
     ShopsService,
-    EmitEventService
+    EmitEventService,
+    UserAddressComponent
   ],
   bootstrap: [AppComponent]
 })

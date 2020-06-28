@@ -5,12 +5,14 @@ import {FlashMessagesService} from 'angular2-flash-messages';
 import {ValidateService} from '../../../../services/validate/validate.service';
 import {EmitShopService} from '../../../../services/emitter/emit-shop.service';
 import {now} from 'moment';
+import { UserAddressComponent } from '../../user-address/user-address.component';
 
 @Component({
   selector: 'app-user-shop-form',
   templateUrl: './user-shop-form.component.html',
   styleUrls: ['./user-shop-form.component.css']
 })
+
 export class UserShopFormComponent implements OnInit {
   shopForm = new FormGroup({
     name: new FormControl('test'),
@@ -19,6 +21,13 @@ export class UserShopFormComponent implements OnInit {
     enabled: new FormControl(true),
     description: new FormControl('Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
     updatedAt: new FormControl('')
+  });
+  addressForm = new FormGroup({
+    street: new FormControl(''),
+    buildingNumber: new FormControl(''),
+    apartmentNumber: new FormControl(''),
+    postCode: new FormControl(''),
+    cityName: new FormControl('')
   });
 
   isInitCall = true;
@@ -30,7 +39,8 @@ export class UserShopFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private flashMessage: FlashMessagesService,
     private validateService: ValidateService,
-    private emitShopService: EmitShopService
+    private emitShopService: EmitShopService,
+    private userAddressComponent: UserAddressComponent
   ) { }
 
   ngOnInit(): void {
@@ -60,10 +70,13 @@ export class UserShopFormComponent implements OnInit {
   }
 
   submitShopCall() {
+    const addressFormObj = this.addressForm.getRawValue();
+    const serializedAddressForm = JSON.stringify(addressFormObj);
     this.shopForm.patchValue({updatedAt : now()});
+    this.shopUpdateId = this.userAddressComponent.submitAddress(serializedAddressForm)
+    this.shopForm.patchValue({shopAddress : this.shopUpdateId});
     const formObj = this.shopForm.getRawValue();
     const serializedForm = JSON.stringify(formObj);
-    console.log(serializedForm);
 
     if (this.isNewShop) {
       this.shopsService.createShop(serializedForm).subscribe(

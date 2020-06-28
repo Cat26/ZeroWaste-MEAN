@@ -209,7 +209,7 @@ router.post('/newAddress', (req, res, next) => {
         if(err){
             res.json({success: false, msg: 'Failed to add new address.'})
         }else {
-            res.json({success: true, msg: 'New address added.'})
+            res.json({success: true, msg: 'New address added.', id: address._id})
         }
     });
 });
