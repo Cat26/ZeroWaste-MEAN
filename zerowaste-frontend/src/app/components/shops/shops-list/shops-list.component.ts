@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ShopsService} from "../../../services/shops/shops.service";
+import { ShopsService } from '../../../services/shops/shops.service';
+import { EmitShopService } from '../../../services/emitter/emit-shop.service';
 
 @Component({
   selector: 'app-shops-list',
@@ -9,11 +10,14 @@ import {ShopsService} from "../../../services/shops/shops.service";
 export class ShopsListComponent implements OnInit {
   shops = [];
   constructor(
-    private shopsService: ShopsService
+    private shopsService: ShopsService,
+    private emitShopService: EmitShopService
   ) { }
 
   ngOnInit(): void {
-    this.getAllShops();
+    this.emitShopService.updateShopListener().subscribe(msg => {
+      this.getAllShops();
+    });
   }
 
   getAllShops(){

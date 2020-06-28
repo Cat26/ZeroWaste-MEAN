@@ -11,6 +11,40 @@
         required
       />
     </div>
+    <div id="form-group">
+      <label>Shop email</label>
+      <input
+        class="form-control"
+        type="email"
+        name="email"
+        formControlName="email"
+        maxlength="50"
+        required
+      />
+    </div>
+    <div id="form-group">
+      <label>Phone number</label>
+      <input
+        class="form-control"
+        type="tel"
+        name="phoneNumber"
+        formControlName="phoneNumber"
+        maxlength="50"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Shop description</label>
+      <textarea
+        class="form-control"
+        type="text"
+        name="description"
+        formControlName="description"
+        maxlength="500"
+        required
+        ></textarea>
+    </div>
     <div class="form-group">
       <button type="submit" class="btn btn-primary" (click)="submitShopCall()">
         Submit

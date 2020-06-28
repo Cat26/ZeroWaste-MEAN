@@ -231,10 +231,10 @@ router.get('/address/:_id/info', (req, res) => {
             })
         }
     })
-})
+});
 
 // Shops
-router.post('/newShop', (req, res, next) => {
+router.post('/newShop', passport.authenticate('jwt', {session: false}),(req, res, next) => {
     console.log(req)
     let newShop = new Shop({
         name: req.body.name,
@@ -245,7 +245,7 @@ router.post('/newShop', (req, res, next) => {
         createdAt: req.body.createdAt,
         updatedAt: req.body.updatedAt,
         description: req.body.description,
-        idUser: req.user,
+        owner: req.user,
         enabled: req.body.enabled
     });
 
@@ -264,7 +264,7 @@ router.post('/newShop', (req, res, next) => {
     })
 });
 
-router.get('/shops', (req, res) => {
+router.get('/shops',(req, res) => {
     Shop.getAllShops((err, shops) =>{
         if (err) {
             res.json({
@@ -279,6 +279,6 @@ router.get('/shops', (req, res) => {
             })
         }
     })
-})
+});
 
 module.exports = router;
