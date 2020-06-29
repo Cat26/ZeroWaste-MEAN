@@ -76,8 +76,6 @@ export class UserShopFormComponent implements OnInit {
     const serializedAddressForm = JSON.stringify(addressFormObj);
     this.shopForm.patchValue({updatedAt : now()});
     this.shopForm.patchValue({shopAddress : this.userAddressComponent.submitAddress(serializedAddressForm)});
-    this.shopForm.patchValue({shopAddress : '5efa5a9bdb21934b78f60b31'});
-
     console.log(this.shopForm);
     const formObj = this.shopForm.getRawValue();
     const serializedForm = JSON.stringify(formObj);
