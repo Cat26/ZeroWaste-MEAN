@@ -60,9 +60,9 @@ export class UserAddressComponent implements OnInit {
             res.msg,
             {cssClass: 'alert-success', timeout: 3000}
           );
+          console.log(res.idAddress);
           this.clearFormData();
-          console.log(res.shopAddress);
-          return res.shopAddress;
+          return res.idAddress;
         } else {
           this.flashMessage.show(
             res.msg,

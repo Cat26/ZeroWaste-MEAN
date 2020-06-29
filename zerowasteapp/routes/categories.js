@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const Address = require('../models/address');
 const Event = require('../models/event');
+const Address = require('../models/address');
 const Shop = require('../models/shops');
 const passport = require('passport');
 const multer = require('multer');
@@ -245,7 +245,7 @@ router.post('/newShop', passport.authenticate('jwt', {session: false}),(req, res
     console.log(req)
     let newShop = new Shop({
         name: req.body.name,
-        shopAddress: req.shopAddress,
+        shopAddress: req.body.shopAddress,
         email: req.body.email,
         phoneNumber: req.body.phoneNumber,
         rating: req.body.rating,
