@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const AddressSchema = mongoose.model('Address').schema;
 const UserSchema = mongoose.model('User').schema;
 
 const ShopSchema = mongoose.Schema({
@@ -8,10 +9,7 @@ const ShopSchema = mongoose.Schema({
         maxlength: 50,
         minlength: 3
     },
-    shopAddress: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Address'
-    },
+    shopAddress: AddressSchema,
     email: {
         type: String,
         required: false

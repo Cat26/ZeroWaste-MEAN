@@ -20,7 +20,7 @@ export class AddressComponent implements OnInit {
   getAddressById(addressId) {
     this.addressService.getAddressById(addressId).subscribe((address: any) => {
       this.address = address.address;
-      console.log(address)
+      console.log(address);
       return true;
     },
       error => {

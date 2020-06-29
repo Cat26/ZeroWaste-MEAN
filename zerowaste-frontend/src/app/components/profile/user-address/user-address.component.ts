@@ -61,7 +61,8 @@ export class UserAddressComponent implements OnInit {
             {cssClass: 'alert-success', timeout: 3000}
           );
           this.clearFormData();
-          return res.id;
+          console.log(res.shopAddress);
+          return res.shopAddress;
         } else {
           this.flashMessage.show(
             res.msg,

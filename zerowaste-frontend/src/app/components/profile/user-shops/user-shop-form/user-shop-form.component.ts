@@ -5,7 +5,9 @@ import {FlashMessagesService} from 'angular2-flash-messages';
 import {ValidateService} from '../../../../services/validate/validate.service';
 import {EmitShopService} from '../../../../services/emitter/emit-shop.service';
 import {now} from 'moment';
-import { UserAddressComponent } from '../../user-address/user-address.component';
+import { AddressService } from '../../../../services/address/address.service';
+
+// import { UserAddressComponent } from '../../user-address/user-address.component';
 
 @Component({
   selector: 'app-user-shop-form',
@@ -33,6 +35,7 @@ export class UserShopFormComponent implements OnInit {
   isInitCall = true;
   isNewShop = true;
   shopUpdateId = undefined;
+  atest = undefined;
 
   constructor(
     private shopsService: ShopsService,
@@ -40,7 +43,8 @@ export class UserShopFormComponent implements OnInit {
     private flashMessage: FlashMessagesService,
     private validateService: ValidateService,
     private emitShopService: EmitShopService,
-    private userAddressComponent: UserAddressComponent
+    private addressService: AddressService
+    // private userAddressComponent: UserAddressComponent
   ) { }
 
   ngOnInit(): void {
@@ -65,57 +69,126 @@ export class UserShopFormComponent implements OnInit {
 
   clearFormData() {
     this.shopForm.reset();
+    this.addressForm.reset();
     this.isNewShop = true;
     this.shopUpdateId = undefined;
   }
+
+//   submitShopCall() {
+//     const addressFormObj = this.addressForm.getRawValue();
+//     const serializedAddressForm = JSON.stringify(addressFormObj);
+//     this.shopForm.patchValue({updatedAt : now()});
+//     console.log(this.userAddressComponent.submitAddress(serializedAddressForm));
+//     // this.shopForm.patchValue({shopAddress : this.userAddressComponent.submitAddress(serializedAddressForm)});
+//     const formObj = this.shopForm.getRawValue();
+//     const serializedForm = JSON.stringify(formObj);
+//
+//     if (this.isNewShop) {
+//       this.shopsService.createShop(serializedForm).subscribe(
+//         (res: any) => {
+//           if (res.success) {
+//             this.emitShopService.emitDeleteCreateShop('shop created');
+//             this.flashMessage.show(
+//               res.msg,
+//               {cssClass: 'alert-success', timeout: 3000}
+//             );
+//             this.clearFormData();
+//           } else {
+//             this.flashMessage.show(
+//               res.msg,
+//               {cssClass: 'alert-danger', timeout: 5000}
+//             );
+//             console.log(res.error);
+//           }
+//         }
+//       );
+//     } else {
+//       this.shopsService.updateShop(this.shopUpdateId, serializedForm).subscribe(
+//         (res: any) => {
+//           if (res.success) {
+//             this.emitShopService.emitDeleteCreateShop('shop updated');
+//             this.flashMessage.show(
+//               res.msg,
+//               {cssClass: 'alert-success', timeout: 3000}
+//             );
+//             this.clearFormData();
+//           } else {
+//             this.flashMessage.show(
+//               res.msg,
+//               {cssClass: 'alert-danger', timeout: 5000}
+//             );
+//             console.log(res.error);
+//           }
+//         }
+//       );
+//     }
+//   }
+// }
 
   submitShopCall() {
     const addressFormObj = this.addressForm.getRawValue();
     const serializedAddressForm = JSON.stringify(addressFormObj);
     this.shopForm.patchValue({updatedAt : now()});
-    this.shopUpdateId = this.userAddressComponent.submitAddress(serializedAddressForm)
-    this.shopForm.patchValue({shopAddress : this.shopUpdateId});
-    const formObj = this.shopForm.getRawValue();
-    const serializedForm = JSON.stringify(formObj);
 
-    if (this.isNewShop) {
-      this.shopsService.createShop(serializedForm).subscribe(
-        (res: any) => {
-          if (res.success) {
-            this.emitShopService.emitDeleteCreateShop('shop created');
-            this.flashMessage.show(
-              res.msg,
-              {cssClass: 'alert-success', timeout: 3000}
+    this.addressService.createAddress(serializedAddressForm).subscribe(
+      (res: any) => {
+        if (res.success) {
+          this.flashMessage.show(
+            res.msg,
+            {cssClass: 'alert-success', timeout: 3000}
+          );
+          this.shopForm.patchValue({shopAddress : res.shopAddress});
+
+          const formObj = this.shopForm.getRawValue();
+          const serializedForm = JSON.stringify(formObj);
+
+          if (this.isNewShop) {
+            this.shopsService.createShop(serializedForm).subscribe(
+              (res: any) => {
+                if (res.success) {
+                  this.emitShopService.emitDeleteCreateShop('shop created');
+                  this.flashMessage.show(
+                    res.msg,
+                    {cssClass: 'alert-success', timeout: 3000}
+                  );
+                  this.clearFormData();
+                } else {
+                  this.flashMessage.show(
+                    res.msg,
+                    {cssClass: 'alert-danger', timeout: 5000}
+                  );
+                  console.log(res.error);
+                }
+              }
             );
-            this.clearFormData();
           } else {
-            this.flashMessage.show(
-              res.msg,
-              {cssClass: 'alert-danger', timeout: 5000}
+            this.shopsService.updateShop(this.shopUpdateId, serializedForm).subscribe(
+              (res: any) => {
+                if (res.success) {
+                  this.emitShopService.emitDeleteCreateShop('shop updated');
+                  this.flashMessage.show(
+                    res.msg,
+                    {cssClass: 'alert-success', timeout: 3000}
+                  );
+                  this.clearFormData();
+                } else {
+                  this.flashMessage.show(
+                    res.msg,
+                    {cssClass: 'alert-danger', timeout: 5000}
+                  );
+                  console.log(res.error);
+                }
+              }
             );
-            console.log(res.error);
           }
+        } else {
+          this.flashMessage.show(
+            res.msg,
+            {cssClass: 'alert-danger', timeout: 5000}
+          );
+          console.log(res.error);
         }
-      );
-    } else {
-      this.shopsService.updateShop(this.shopUpdateId, serializedForm).subscribe(
-        (res: any) => {
-          if (res.success) {
-            this.emitShopService.emitDeleteCreateShop('shop updated');
-            this.flashMessage.show(
-              res.msg,
-              {cssClass: 'alert-success', timeout: 3000}
-            );
-            this.clearFormData();
-          } else {
-            this.flashMessage.show(
-              res.msg,
-              {cssClass: 'alert-danger', timeout: 5000}
-            );
-            console.log(res.error);
-          }
-        }
-      );
-    }
+      }
+    );
   }
 }

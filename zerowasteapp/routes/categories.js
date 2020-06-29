@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const Event = require('../models/event');
 const Address = require('../models/address');
+const Event = require('../models/event');
 const Shop = require('../models/shops');
 const passport = require('passport');
 const multer = require('multer');
@@ -207,9 +207,16 @@ router.post('/newAddress', (req, res, next) => {
 
     Address.addAddress(newAddress, (err, address) => {
         if(err){
-            res.json({success: false, msg: 'Failed to add new address.'})
+            res.json({
+                success: false,
+                msg: 'Failed to add new address.'
+            })
         }else {
-            res.json({success: true, msg: 'New address added.', id: address._id})
+            res.json({
+                success: true,
+                msg: 'New address added.',
+                shopAddress: address
+            })
         }
     });
 });
@@ -238,7 +245,7 @@ router.post('/newShop', passport.authenticate('jwt', {session: false}),(req, res
     console.log(req)
     let newShop = new Shop({
         name: req.body.name,
-        shopAddress: req.body.shopAddress,
+        shopAddress: req.shopAddress,
         email: req.body.email,
         phoneNumber: req.body.phoneNumber,
         rating: req.body.rating,
