@@ -8,7 +8,7 @@ import {AddressService} from '../../services/address/address.service';
 })
 export class AddressComponent implements OnInit {
   address = [];
-  @ Input() shopAddressId: string
+  @Input() shopAddressId: string;
   constructor(
     private addressService: AddressService
   ) { }
@@ -20,7 +20,6 @@ export class AddressComponent implements OnInit {
   getAddressById(addressId) {
     this.addressService.getAddressById(addressId).subscribe((address: any) => {
       this.address = address.address;
-      console.log(address);
       return true;
     },
       error => {

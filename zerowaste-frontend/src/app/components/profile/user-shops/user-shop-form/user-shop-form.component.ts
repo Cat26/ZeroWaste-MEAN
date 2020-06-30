@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {ShopsService} from '../../../../services/shops/shops.service';
-import {FlashMessagesService} from 'angular2-flash-messages';
-import {ValidateService} from '../../../../services/validate/validate.service';
-import {EmitShopService} from '../../../../services/emitter/emit-shop.service';
-import {now} from 'moment';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ShopsService } from '../../../../services/shops/shops.service';
+import { FlashMessagesService } from 'angular2-flash-messages';
+import { ValidateService } from '../../../../services/validate/validate.service';
+import { EmitShopService } from '../../../../services/emitter/emit-shop.service';
+import { now } from 'moment';
 import { UserAddressComponent } from '../../user-address/user-address.component';
+import { AddressService } from "../../../../services/address/address.service";
 
 @Component({
   selector: 'app-user-shop-form',
@@ -14,21 +15,17 @@ import { UserAddressComponent } from '../../user-address/user-address.component'
 })
 
 export class UserShopFormComponent implements OnInit {
+  @ViewChild(UserAddressComponent) child: UserAddressComponent;
+  shopFormDisabled: boolean;
+  addressId = '';
+  address;
   shopForm = new FormGroup({
     name: new FormControl(''),
     email: new FormControl(''),
     phoneNumber: new FormControl(''),
     enabled: new FormControl(true),
-    description: new FormControl('Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
-    updatedAt: new FormControl(''),
-    shopAddress: new FormControl('')
-  });
-  addressForm = new FormGroup({
-    street: new FormControl(''),
-    buildingNumber: new FormControl(''),
-    apartmentNumber: new FormControl(''),
-    postCode: new FormControl(''),
-    cityName: new FormControl('')
+    description: new FormControl(''),
+    updatedAt: new FormControl('')
   });
 
   isInitCall = true;
@@ -41,10 +38,13 @@ export class UserShopFormComponent implements OnInit {
     private flashMessage: FlashMessagesService,
     private validateService: ValidateService,
     private emitShopService: EmitShopService,
-    private userAddressComponent: UserAddressComponent
-  ) { }
+    private addressService: AddressService
+  ) {
+  }
 
   ngOnInit(): void {
+    this.shopFormDisabled = true;
+    this.shopForm.disable();
     this.emitShopService.updateShopListener().subscribe(
       (shopData: any) => {
         if (this.isInitCall) {
@@ -56,29 +56,36 @@ export class UserShopFormComponent implements OnInit {
     );
   }
 
+
   loadDataToUpdate(updateShopData) {
+    this.shopForm.enable();
+    this.shopFormDisabled = false;
     this.isNewShop = false;
-    this.shopUpdateId = updateShopData._id;
+    this.shopUpdateId = updateShopData.shop._id;
     this.shopForm.patchValue({
-      name: updateShopData.name
+      name: updateShopData.shop.name,
+      email: updateShopData.shop.email,
+      phoneNumber: updateShopData.shop.phoneNumber,
+      description: updateShopData.shop.description
     });
+    this.child.loadDataToUpdate(updateShopData.address.address);
   }
 
   clearFormData() {
     this.shopForm.reset();
-    this.addressForm.reset();
+    this.child.clearFormData();
     this.isNewShop = true;
     this.shopUpdateId = undefined;
+    this.addressId = '';
+    this.shopFormDisabled = true;
+    this.shopForm.disable();
   }
 
   submitShopCall() {
-    const addressFormObj = this.addressForm.getRawValue();
-    const serializedAddressForm = JSON.stringify(addressFormObj);
-    this.shopForm.patchValue({updatedAt : now()});
-    this.shopForm.patchValue({shopAddress : this.userAddressComponent.submitAddress(serializedAddressForm)});
-    console.log(this.shopForm);
-    const formObj = this.shopForm.getRawValue();
-    const serializedForm = JSON.stringify(formObj);
+    this.shopForm.patchValue({updatedAt: now()});
+    this.shopForm.patchValue({shopAddress: this.addressId});
+    let formObj = this.shopForm.getRawValue();
+    let serializedForm = JSON.stringify(formObj);
 
     if (this.isNewShop) {
       this.shopsService.createShop(serializedForm).subscribe(
@@ -119,5 +126,11 @@ export class UserShopFormComponent implements OnInit {
         }
       );
     }
+  }
+
+  enableShopForm(addressId) {
+    this.shopFormDisabled = false;
+    this.addressId = addressId;
+    this.shopForm.enable();
   }
 }

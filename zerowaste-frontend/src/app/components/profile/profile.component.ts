@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "../../services/auth/auth.service";
 import { EmitEventService } from "../../services/emitter/emit-event.service";
+import { EmitShopService } from "../../services/emitter/emit-shop.service";
 
 @Component({
   selector: 'app-profile',
@@ -32,24 +33,28 @@ export class ProfileComponent implements OnInit {
       optionName: "Shops",
       optionChecked: false
     },
-    {
-      id: 3,
-      optionValue: "personal-goals",
-      optionName: "Personal Goals",
-      optionChecked: false
-    },
+    // {
+    //   id: 3,
+    //   optionValue: "personal-goals",
+    //   optionName: "Personal Goals",
+    //   optionChecked: false
+    // },
 
   ];
 
 
   constructor(
     private authService: AuthService,
-    private emitEventService: EmitEventService
+    private emitEventService: EmitEventService,
+    private emitShopService: EmitShopService
   ) {
   }
 
   ngOnInit() {
     this.emitEventService.deleteCreateEventListener().subscribe(msg =>{
+      this.getProfileData();
+    });
+    this.emitShopService.deleteCreateEventListener().subscribe(msg =>{
       this.getProfileData();
     });
   }
@@ -63,6 +68,7 @@ export class ProfileComponent implements OnInit {
         this.user = profile.user;
         this.userEvents = profile.events;
         this.userShops = profile.shops;
+        console.log(this.userShops)
       },
       error => {
         console.log(error);

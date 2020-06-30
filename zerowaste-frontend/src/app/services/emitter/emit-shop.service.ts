@@ -15,11 +15,15 @@ export class EmitShopService {
     this.createDeleteActionShop.next(msg);
   }
 
+  deleteCreateEventListener() {
+    return this.createDeleteActionShop.asObservable();
+  }
+
   updateShopListener() {
     return this.updateActionShop.asObservable();
   }
 
-  emitUpdateShop(shopData) {
-    this.updateActionShop.next(shopData);
+  emitUpdateShop(data) {
+    this.updateActionShop.next(data);
   }
 }

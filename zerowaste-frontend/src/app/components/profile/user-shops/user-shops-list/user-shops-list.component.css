@@ -1,0 +1,12 @@
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+  filter: invert(1);
+}
+.carousel-control-next {
+  left: 100%;
+  width: 5%;
+}
+.carousel-control-prev {
+  left: -6%;
+  width: 5%;
+}

@@ -56,7 +56,8 @@ export class ShopsService {
     this.authService.loadToken();
     const httpOptions = {
       headers: new HttpHeaders({
-        'Authorization': this.authService.authToken
+        'Authorization': this.authService.authToken,
+        'Content-Type': 'application/json'
       })
     };
     return this.http.put('http://localhost:3000/categories/shops/' + shopId + '/update', shopData, httpOptions);

@@ -27,4 +27,13 @@ export class AddressService {
     };
     return this.http.post('http://localhost:3000/categories/newAddress', addressData, httpOptions);
   }
+
+  updateAddress(addressId, addressData) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.put('http://localhost:3000/categories/address/' + addressId + '/update', addressData, httpOptions);
+  }
 }
