@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Event = require('../models/event');
+const Address = require('../models/address');
+const Shop = require('../models/shops');
 const passport = require('passport');
 const multer = require('multer');
 const fs = require('fs');
@@ -26,6 +28,7 @@ const upload = multer({storage: storage, fileFilter: fileFilter});
 
 // Events
 router.post('/events', upload.single('eventImage'), passport.authenticate('jwt', {session: false}), (req, res, next) => {
+    console.log(req)
     let newEvent = new Event({
         name: req.body.name,
         description: req.body.description,
@@ -191,5 +194,135 @@ router.get('/events/filter/eventDescription/:filter', (req, res, next) => {
     })
 });
 
+
+// Address
+router.post('/newAddress', (req, res, next) => {
+    let newAddress = new Address({
+        street: req.body.street,
+        buildingNumber: req.body.buildingNumber,
+        apartmentNumber: req.body.apartmentNumber,
+        postCode: req.body.postCode,
+        cityName: req.body.cityName
+    });
+
+    Address.addAddress(newAddress, (err, address) => {
+        if (err) {
+            res.json({
+                success: false,
+                msg: 'Failed to add new address.'
+            })
+        } else {
+            res.json({
+                success: true,
+                msg: 'New address added.',
+                addressId: address._id
+            })
+        }
+    });
+});
+
+router.get('/address/:_id/info', (req, res) => {
+    Address.getAddressById(req.params._id, (err, address) => {
+        if (err) {
+            res.json({
+                success: false,
+                msg: 'Failed to get this address',
+                error: err
+            })
+        } else if (!address) {
+            res.status(400).send('Address not found')
+        } else {
+            res.json({
+                success: true,
+                address: address
+            })
+        }
+    })
+});
+
+router.put('/address/:_id/update', (req, res, next) => {
+    Address.updateAddress(req.params._id, req.body, (err, event) => {
+        if (err) {
+            res.json({success: false, msg: 'Failed to update address', error: err})
+        } else {
+            res.json({
+                success: true,
+                msg: 'Address updated',
+            });
+        }
+    })
+});
+
+// Shops
+router.post('/newShop', passport.authenticate('jwt', {session: false}), (req, res, next) => {
+    let newShop = new Shop({
+        name: req.body.name,
+        shopAddress: req.body.shopAddress,
+        email: req.body.email,
+        phoneNumber: req.body.phoneNumber,
+        rating: req.body.rating,
+        createdAt: req.body.createdAt,
+        updatedAt: req.body.updatedAt,
+        description: req.body.description,
+        owner: req.user,
+        enabled: req.body.enabled
+    });
+
+    Shop.addShop(newShop, (err, shop) => {
+        if (err) {
+            res.json({
+                success: false,
+                msg: 'Failed to add new shop.'
+            });
+        } else {
+            res.json({
+                success: true,
+                msg: 'Shop Added.'
+            })
+        }
+    })
+});
+
+router.get('/shops', (req, res) => {
+    Shop.getAllShops((err, shops) => {
+        if (err) {
+            res.json({
+                success: false,
+                msh: 'No shop to get',
+                error: err
+            })
+        } else {
+            res.json({
+                success: true,
+                shops: shops
+            })
+        }
+    })
+});
+
+router.put('/shops/:_id/update', passport.authenticate('jwt', {session: false}), (req, res, next) => {
+    console.log(req.body)
+    Shop.updateShopInfo(req.params._id, req.body, (err, event) => {
+        if (err) {
+            res.json({success: false, msg: 'Failed to update shop', error: err})
+        } else {
+            res.json({
+                success: true,
+                msg: 'Shop updated',
+            });
+        }
+    })
+});
+
+router.delete('/shops/:_id/delete', passport.authenticate('jwt', {session: false}), (req, res, next) => {
+    Shop.deleteShop(req.params._id, (err, shop) => {
+        if (err) {
+            res.json({success: false, msg: 'Failed to delete shop', error: err})
+        } else if (!shop) {
+            res.status(400).send('Shop not found')
+        }
+        res.json({success: true, msg: 'Shop deleted'})
+    });
+});
 
 module.exports = router;

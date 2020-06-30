@@ -1,0 +1,4 @@
+<div class="events-list">
+  <app-shops-item *ngFor="let shop of shops" [shopItem]="shop"></app-shops-item>
+  <p class="no-events" *ngIf="shops.length == 0">No shops found</p>
+</div>

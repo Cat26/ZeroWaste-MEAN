@@ -1,0 +1,32 @@
+<div class="row"  *ngIf="shopItem.enabled">
+  <div class="col-md-9">
+    <div class="card event-item {{ 'Shop-' + shopItem._id }}">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-6">
+            <h2 class="featurette-heading">{{ shopItem.name }}</h2>
+            <p class="lead">
+              Email: {{shopItem.email}}<br>
+              Phone: {{shopItem.phoneNumber}}<br>
+              <app-address [shopAddressId]="shopItem.shopAddress"></app-address>
+            <p>{{shopItem.description}}</p>
+          </div>
+          <div class="col-3">
+            <google-map
+              height="300px"
+              width="300px"
+              [center]="center"
+              [options]="options"
+              [zoom]="zoom">
+              <map-marker
+                #markerElem
+                [position]="center"
+              >
+              </map-marker>
+            </google-map>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -20,9 +20,11 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { EventsComponent } from './components/events/events.component';
+import { ShopsComponent } from "./components/shops/shops.component";
 import { ProfileComponent } from './components/profile/profile.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
+import { GoogleMapsModule } from '@angular/google-maps';
 
 import { ValidateService } from "./services/validate/validate.service";
 import { AuthService } from "./services/auth/auth.service";
@@ -39,10 +41,20 @@ import { HomeListComponent } from './components/home/home-list/home-list.compone
 import { HomeItemComponent } from './components/home/home-list/home-item/home-item.component';
 import { EventsManagerComponent } from './components/events/events-manager/events-manager.component';
 import { UserCalendarComponent } from './components/profile/user-calendar/user-calendar.component';
-import { MatDialogModule } from "@angular/material/dialog";
+import { MatDialogModule } from '@angular/material/dialog';
 import { CalendarItemModalComponent } from './components/profile/user-calendar/calendar-item-modal/calendar-item-modal.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule } from "@angular/material/button";
+import { MatButtonModule } from '@angular/material/button';
+import { UserShopsComponent } from './components/profile/user-shops/user-shops.component';
+import { UserShopsListComponent } from './components/profile/user-shops/user-shops-list/user-shops-list.component';
+import { UserShopsItemComponent } from './components/profile/user-shops/user-shops-list/user-shops-item/user-shops-item.component';
+import { UserShopFormComponent } from './components/profile/user-shops/user-shop-form/user-shop-form.component';
+import { ShopsService } from './services/shops/shops.service';
+import { ShopsListComponent } from './components/shops/shops-list/shops-list.component';
+import { ShopsItemComponent } from './components/shops/shops-list/shops-item/shops-item.component';
+import { AddressComponent } from './components/address/address.component';
+import { AddressItemComponent } from './components/address/address-item/address-item.component';
+import { UserAddressComponent } from './components/profile/user-address/user-address.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +64,7 @@ import { MatButtonModule } from "@angular/material/button";
     RegisterComponent,
     HomeComponent,
     EventsComponent,
+    ShopsComponent,
     ProfileComponent,
     EventsListComponent,
     EventItemComponent,
@@ -59,11 +72,21 @@ import { MatButtonModule } from "@angular/material/button";
     UserEventsListComponent,
     UserEventFormComponent,
     UserEventItemComponent,
+    UserShopsComponent,
+    UserShopsListComponent,
+    UserShopsItemComponent,
+    UserShopFormComponent,
     HomeListComponent,
     HomeItemComponent,
     EventsManagerComponent,
     UserCalendarComponent,
-    CalendarItemModalComponent
+    CalendarItemModalComponent,
+    EventsManagerComponent,
+    ShopsListComponent,
+    ShopsItemComponent,
+    AddressComponent,
+    AddressItemComponent,
+    UserAddressComponent
   ],
   imports: [
     BrowserModule,
@@ -75,13 +98,16 @@ import { MatButtonModule } from "@angular/material/button";
     FontAwesomeModule,
     MatDialogModule,
     BrowserAnimationsModule,
-    MatButtonModule
+    MatButtonModule,
+    GoogleMapsModule,
   ],
   providers: [
     ValidateService,
     AuthService,
     EventsService,
-    EmitEventService
+    ShopsService,
+    EmitEventService,
+    UserAddressComponent
   ],
   bootstrap: [AppComponent]
 })

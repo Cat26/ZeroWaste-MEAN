@@ -1,0 +1,7 @@
+<div class="card {{ 'event-' + userShopItem._id }}">
+  <div class="card-body">
+    <app-shops-item [shopItem]="userShopItem"></app-shops-item>
+    <button class="btn btn-danger" (click)="deleteShop()">delete</button>
+    <button class="btn btn-warning" (click)="updateShop(userShopItem)">update</button>
+  </div>
+</div>

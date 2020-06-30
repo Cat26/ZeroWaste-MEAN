@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
 const Event = require('../models/event');
+const Shop = require('../models/shops');
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
@@ -64,9 +65,18 @@ router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res,
         if(err) {
             res.status(400).send('Could not get profile')
         } else {
-            res.json({
-                user: req.user,
-                events: userEvents
+            let user = req.user;
+            let events = userEvents;
+            Shop.getUserShops(user._id, (err, userShops) => {
+                if(err) {
+                    res.status(400).send('Could not get shops')
+                } else {
+                    res.json({
+                        user: user,
+                        shops: userShops,
+                        events: events
+                    });
+                }
             });
         }
     });

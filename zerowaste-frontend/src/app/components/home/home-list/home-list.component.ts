@@ -14,9 +14,9 @@ export class HomeListComponent implements OnInit {
 
   ngOnInit(): void {
     this.eventService.getThreeNewestItem().subscribe((events: any) => {
-      this.events = events.events;
-      console.log(events.events);
-    },
+        this.events = events.events;
+        console.log(events.events);
+      },
       error => {
         console.log(error);
         return false;

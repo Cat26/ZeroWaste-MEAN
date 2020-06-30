@@ -1,0 +1,57 @@
+<div className="card card-body mt-4 mb-4">
+  <app-user-address (addressCreated)="enableShopForm($event)"></app-user-address>
+  <form [formGroup]="shopForm">
+    <div class="form-group">
+      <label>Shop Name</label>
+      <input
+        class="form-control"
+        type="text"
+        name="name"
+        formControlName="name"
+        maxlength="50"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label>Shop email</label>
+      <input
+        class="form-control"
+        type="email"
+        name="email"
+        formControlName="email"
+        maxlength="50"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label>Phone number</label>
+      <input
+        class="form-control"
+        type="tel"
+        name="phoneNumber"
+        formControlName="phoneNumber"
+        maxlength="50"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label>Shop description</label>
+      <textarea
+        class="form-control"
+        type="text"
+        name="description"
+        formControlName="description"
+        maxlength="500"
+        required
+      ></textarea>
+    </div>
+  </form>
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary" (click)="submitShopCall()" [disabled]="shopFormDisabled">
+      Submit
+    </button>
+    <button type="submit" class="btn btn-danger" (click)="clearFormData()">
+      Cancel
+    </button>
+  </div>
+</div>
